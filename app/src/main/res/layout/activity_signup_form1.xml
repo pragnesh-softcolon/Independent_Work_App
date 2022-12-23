@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Activity.signup_Form_1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+
+        <TableLayout
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </TableLayout>
+        <TextView
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_32ssp"
+            android:text="Complete setup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:id="@+id/line"
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:background="@drawable/style1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_350sdp">
+<!--            <TextView-->
+<!--                android:id="@+id/signup_info_tv1"-->
+<!--                android:textSize="@dimen/_20ssp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:text="Personal Information"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"/>-->
+
+            <TextView
+                android:id="@+id/Fname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:text="First Name"
+                android:textSize="@dimen/_15ssp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ed_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Fname_tv"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@color/editText"
+                android:hint="First Name">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Fname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/editText"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/Lname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ed_first_name"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Last Name"
+                android:textSize="@dimen/_15ssp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ed_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Lname_tv"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:hint="Last Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Lname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/editText"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/gendar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ed_last_name"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Gender"
+                android:textSize="@dimen/_15ssp" />
+
+            <FrameLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.widget.Button
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/btn_gendar_female"
+                    android:layout_marginLeft="@dimen/_120sdp"
+                    android:clickable="false"
+                    android:layout_width="@dimen/_125sdp"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:text="Female"/>
+
+                <android.widget.Button
+                    android:gravity="center"
+                    android:layout_below="@id/gendar_tv"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/btn_gendar_male"
+                    android:clickable="false"
+                    android:layout_marginLeft="@dimen/_35sdp"
+                    android:layout_width="@dimen/_125sdp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_height="wrap_content"
+                    android:text="Male"/>
+
+                <android.widget.Button
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:id="@+id/btn_gendar_female2"
+                    android:visibility="gone"
+                    android:layout_marginLeft="@dimen/_120sdp"
+                    android:clickable="false"
+                    android:layout_width="@dimen/_125sdp"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:text="Female"/>
+
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_marginLeft="@dimen/_95sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@color/dot_active"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/l2"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@color/dot_inactive"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toEndOf="@id/l1" />
+
+            <LinearLayout
+                android:layout_toEndOf="@id/l2"
+                android:id="@+id/l3"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@color/dot_inactive"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/_10sdp"/>
+
+
+            <android.widget.Button
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/l3"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/buttone_style"
+                android:text="next"
+                android:textColor="@color/white" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="HardcodedText">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mhome"
+            android:title="Home" />
+        <item
+            android:id="@+id/Applied_Events"
+            android:title="Applied Events"/>
+        <item
+            android:id="@+id/Posted_Events"
+            android:title="Posted Events"/>
+        <item
+            android:id="@+id/Edit_Profile"
+            android:title="Edit Profile"/>
+        <item
+            android:id="@+id/mlogout"
+            android:title="Logout"/>
+    </group>
+</menu>

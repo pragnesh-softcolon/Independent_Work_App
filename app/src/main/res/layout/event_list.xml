@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linear"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:weightSum="4"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="5dp"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            android:layout_weight="1.5"
+            android:textColor="@color/black"
+            android:text="Cadila - Zydaus\nby abc Transporter"/>
+        <TextView
+            android:id="@+id/tv_branch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="5dp"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Cadila - Zydaus\nby abc Transporter"/>
+
+
+        <TextView
+            android:id="@+id/tv_waight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingHorizontal="5dp"
+            android:layout_weight="1.5"
+            android:textSize="12dp"
+            android:textColor="@color/black"
+            android:text="500KG"/>
+        <ImageView
+            android:id="@+id/invoice_copy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/tv_truck_load"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="5dp"
+            android:textSize="12dp"
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:maxLines="2"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:text="Cadila - Zydaus\nby abc Transporter"
+            android:layout_marginLeft="20dp" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_branch"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:paddingHorizontal="5dp"-->
+        <!--            android:layout_weight="1.5"-->
+        <!--            android:textSize="12dp"-->
+        <!--            android:maxLines="2"-->
+        <!--            android:ellipsize="end"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:text="Cadila - Zydaus\nby abc Transporter"/>-->
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:id="@+id/tv_truck_numer"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="5dp"
+            android:textSize="12dp"
+            android:layout_weight="1.5"
+            android:textColor="@color/black"
+            android:maxLines="2"
+            android:layout_marginStart="10dp"
+            android:ellipsize="end"
+            android:text="Cadila - Zydaus\nby abc Transporter"
+            android:layout_marginLeft="20dp" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/tv_branch"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:paddingHorizontal="5dp"-->
+        <!--            android:layout_weight="1.5"-->
+        <!--            android:textSize="12dp"-->
+        <!--            android:maxLines="2"-->
+        <!--            android:ellipsize="end"-->
+        <!--            android:textColor="@color/black"-->
+        <!--            android:text="Cadila - Zydaus\nby abc Transporter"/>-->
+    </LinearLayout>
+
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        android:layout_marginTop="5dp"/>
+</LinearLayout>

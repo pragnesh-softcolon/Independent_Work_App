@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    tools:context=".Activity.signup_Form_2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:gravity="center"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_32ssp"
+            android:text="Complete setup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_gravity="center"
+            android:id="@+id/line"
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="vertical"
+            android:background="@drawable/style1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_350sdp">
+            <TextView
+                android:id="@+id/Fname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:text="Date Of Birth"
+                android:textSize="@dimen/_15ssp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ed_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Fname_tv"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@color/editText"
+                android:hint="Date Of Birth">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/editText"
+                    android:maxLines="1"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:inputType="none"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/Lname_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ed_first_name"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Phone"
+                android:textSize="@dimen/_15ssp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ed_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Lname_tv"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                app:counterEnabled="true"
+                app:counterMaxLength="10"
+                android:hint="Phone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/PhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/editText"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+            <TextView
+                android:id="@+id/Location_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ed_last_name"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:text="Location"
+                android:textSize="@dimen/_15ssp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ed_Location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Lname_tv"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:hint="Location"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu">
+
+               <AutoCompleteTextView
+                    android:id="@+id/Location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/editText"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:maxLines="1"
+                    android:textColor="@color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/gendar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ed_last_name"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Upload Adharcard Image"
+                android:textSize="@dimen/_15ssp" />
+
+
+                <android.widget.Button
+                    android:background="@color/blue"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="#C7EBF9"
+                    android:id="@+id/UploadImage"
+                    android:clickable="false"
+                    android:paddingRight="@dimen/_15sdp"
+                    android:paddingLeft="@dimen/_15sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Click to upload" />
+
+
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/l1"
+                android:layout_marginLeft="@dimen/_95sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@color/dot_active"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/l2"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_toEndOf="@id/l1"
+                android:background="@color/dot_active"/>
+
+            <LinearLayout
+                android:layout_toEndOf="@id/l2"
+                android:id="@+id/l3"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:background="@color/dot_inactive"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_2sdp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/_10sdp"/>
+
+
+            <android.widget.Button
+                android:id="@+id/btn_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/l3"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:background="@drawable/buttone_style"
+                android:text="next"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>
