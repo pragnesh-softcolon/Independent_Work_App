@@ -3,14 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.PostedEventFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:gravity="center"
+        android:textColor="@color/black"
         android:textSize="@dimen/_30ssp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Posted event" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/event_list"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </FrameLayout>

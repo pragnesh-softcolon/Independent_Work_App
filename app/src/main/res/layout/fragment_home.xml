@@ -4,8 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragment.HomeFragment">
-
+    tools:context=".Fragment.HomeFragment" >
+<TextView
+    android:textColor="@color/black"
+    android:textSize="@dimen/_30ssp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:text="Home Fragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"/>
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
@@ -16,7 +23,7 @@
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/Post"
+        android:id="@+id/CreatePost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add_black_24dp"

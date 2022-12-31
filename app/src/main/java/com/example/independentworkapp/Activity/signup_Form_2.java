@@ -66,7 +66,8 @@ public class signup_Form_2 extends AppCompatActivity
         //Getting the instance of AutoCompleteTextView
         Location.setThreshold(1);//will start working from first character
         Location.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
-        dob.setOnClickListener(new View.OnClickListener() {
+        dob.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View view)
             {

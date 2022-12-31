@@ -64,7 +64,7 @@
                 android:textSize="@dimen/_13sdp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_mail"
+                android:id="@+id/ed_phone"
                 android:layout_below="@+id/email_tv"
                 android:layout_width="match_parent"
                 android:layout_marginLeft="@dimen/_20sdp"
@@ -80,6 +80,7 @@
                     android:background="@color/editText"
                     android:textColor="@color/black"
                     android:maxLines="1"
+                    android:inputType="phone"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,13 +88,13 @@
                 android:id="@+id/pass_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/ed_mail"
+                android:layout_below="@id/ed_phone"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:text="Password"
                 android:textSize="@dimen/_13sdp" />
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/Password"
+                android:id="@+id/ed_Password"
                 android:layout_below="@+id/pass_tv"
                 android:layout_width="match_parent"
                 android:layout_marginLeft="@dimen/_20sdp"
@@ -103,6 +104,7 @@
                 android:hint="Password">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/Password"
                     android:layout_width="match_parent"
                     android:background="@color/editText"
                     android:maxLines="1"
@@ -114,7 +116,7 @@
                 android:id="@+id/forget_pass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/Password"
+                android:layout_below="@id/ed_Password"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_20sdp"

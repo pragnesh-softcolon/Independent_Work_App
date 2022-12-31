@@ -5,9 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.CreateEvent">
+    tools:context=".Activity.CreateEvent"
+    android:gravity="center"
+    android:fitsSystemWindows="true">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+<TextView
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/_30ssp"
+    android:textColor="@color/black"
+    android:text="Create New Event"/>
+
 </LinearLayout>

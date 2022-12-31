@@ -83,18 +83,6 @@
             android:ellipsize="end"
             android:text="Cadila - Zydaus\nby abc Transporter"
             android:layout_marginLeft="20dp" />
-        <!--        <TextView-->
-        <!--            android:id="@+id/tv_branch"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:gravity="center_vertical"-->
-        <!--            android:paddingHorizontal="5dp"-->
-        <!--            android:layout_weight="1.5"-->
-        <!--            android:textSize="12dp"-->
-        <!--            android:maxLines="2"-->
-        <!--            android:ellipsize="end"-->
-        <!--            android:textColor="@color/black"-->
-        <!--            android:text="Cadila - Zydaus\nby abc Transporter"/>-->
     </LinearLayout>
 
 
@@ -121,18 +109,6 @@
             android:ellipsize="end"
             android:text="Cadila - Zydaus\nby abc Transporter"
             android:layout_marginLeft="20dp" />
-        <!--        <TextView-->
-        <!--            android:id="@+id/tv_branch"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:gravity="center_vertical"-->
-        <!--            android:paddingHorizontal="5dp"-->
-        <!--            android:layout_weight="1.5"-->
-        <!--            android:textSize="12dp"-->
-        <!--            android:maxLines="2"-->
-        <!--            android:ellipsize="end"-->
-        <!--            android:textColor="@color/black"-->
-        <!--            android:text="Cadila - Zydaus\nby abc Transporter"/>-->
     </LinearLayout>
 
 

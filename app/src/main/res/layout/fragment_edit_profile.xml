@@ -11,6 +11,7 @@
         android:textSize="@dimen/_30sdp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/black"
         android:text="Edit Profile" />
 
 </FrameLayout>
