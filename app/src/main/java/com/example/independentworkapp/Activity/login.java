@@ -18,7 +18,7 @@ import java.util.Objects;
 public class login extends AppCompatActivity
 {
     TextInputEditText phone,password;
-    TextView signup;
+    TextView signup,phone_error,password_error;
     Button btn_signIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,14 +29,19 @@ public class login extends AppCompatActivity
         btn_signIn.setOnClickListener(view -> {
             if (Objects.requireNonNull(phone.getText()).toString().isEmpty() || phone.getText().toString().length()<10)
             {
-                Toast.makeText(login.this, "Enter valid phone number", Toast.LENGTH_SHORT).show();
+                phone_error.setVisibility(View.VISIBLE);
+                phone.requestFocus();
             }
             else if(Objects.requireNonNull(password.getText()).toString().isEmpty() || password.getText().toString().length()<6)
             {
-                Toast.makeText(login.this, "Please Enter Valid Password", Toast.LENGTH_SHORT).show();
+                phone_error.setVisibility(View.GONE);
+                password_error.setVisibility(View.VISIBLE);
+                password.requestFocus();
             }
             else
             {
+                phone_error.setVisibility(View.GONE);
+                password_error.setVisibility(View.GONE);
                 Intent mainActivity = new Intent(login.this, MainActivity.class);
                 startActivity(mainActivity);
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -57,5 +62,7 @@ public class login extends AppCompatActivity
         signup=findViewById(R.id.signup);
         phone=findViewById(R.id.Phone);
         password=findViewById(R.id.Password);
+        phone_error=findViewById(R.id.error_phone);
+        password_error=findViewById(R.id.error_password);
     }
 }

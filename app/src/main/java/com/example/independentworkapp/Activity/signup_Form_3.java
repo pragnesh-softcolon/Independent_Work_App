@@ -42,22 +42,22 @@ public class signup_Form_3 extends AppCompatActivity
                 if (password.length()>=6 && conformPassword.length()>=6)
                 {
 
-                    if (password.equals(conformPassword)) 
+                    if (password.equals(conformPassword))
                     {
-//                        Regex sampleRegex = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,15}$");
-                        isStrongPassword= sampleRegex.containsMatchIn(conformPassword);
-                        if (isStrongPassword)
-                        {
+////                        Regex sampleRegex = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,15}$");
+//                        isStrongPassword= sampleRegex.containsMatchIn(conformPassword);
+//                        if (isStrongPassword)
+//                        {
                             Toast.makeText(signup_Form_3.this, "Account Successfully created", Toast.LENGTH_SHORT).show();
                             Intent next = new Intent(signup_Form_3.this, MainActivity.class);
                             startActivity(next);
                             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                            finish();
-                        }
-                        else
-                        {
-                            Toast.makeText(signup_Form_3.this, "Required [0-9] [a-z] [A-Z] [Special-character]", Toast.LENGTH_LONG).show();
-                        }
+//                            finish();
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(signup_Form_3.this, "Required [0-9] [a-z] [A-Z] [Special-character]", Toast.LENGTH_LONG).show();
+//                        }
                     } 
                     else 
                     {

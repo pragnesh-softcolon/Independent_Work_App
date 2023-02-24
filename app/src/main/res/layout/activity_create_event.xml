@@ -4,17 +4,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Activity.CreateEvent"
-    android:gravity="center"
     android:fitsSystemWindows="true">
 
-<TextView
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="@dimen/_30ssp"
-    android:textColor="@color/black"
-    android:text="Create New Event"/>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:id="@+id/line"
+                android:layout_margin="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:background="@drawable/style1"
+                android:layout_width="match_parent"
+                android:paddingBottom="@dimen/_20sdp"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
 
 </LinearLayout>

@@ -9,6 +9,7 @@
     android:textColor="@color/black"
     android:textSize="@dimen/_30ssp"
     android:layout_gravity="center"
+    android:visibility="visible"
     android:gravity="center"
     android:text="Home Fragment"
     android:layout_width="match_parent"
@@ -18,7 +19,7 @@
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/event_list"
+        tools:listitem="@layout/event_row"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 

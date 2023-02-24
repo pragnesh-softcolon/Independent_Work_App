@@ -44,6 +44,8 @@
         <activity
             android:name=".Activity.CreateEvent"
             android:screenOrientation = "portrait"
+            android:label="Create Event"
+            android:theme="@style/MyCustome"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

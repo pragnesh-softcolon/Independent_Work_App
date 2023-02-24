@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity
                         Intent BackToLogin = new Intent(getApplicationContext(), login.class);
                         startActivity(BackToLogin);
 //                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+//                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         finish();
-                        Toast.makeText(MainActivity.this, "Logged Out Going to Login Page", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "Logged out Going to Login Page", Toast.LENGTH_SHORT).show();
                         break;
                     }
                     default:

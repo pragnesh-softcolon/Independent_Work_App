@@ -30,6 +30,9 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 public class signup_Form_2 extends AppCompatActivity
 {
@@ -84,6 +87,15 @@ public class signup_Form_2 extends AppCompatActivity
                         // button that is ok button update the
                         // selected date
                         dob.setText(materialDatePicker.getHeaderText());
+                        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+
+                        // Parse birthdate into LocalDate object
+                        LocalDate birthdate = LocalDate.parse(materialDatePicker.getHeaderText(), inputFormatter);
+
+                        // Calculate age based on birthdate
+                        LocalDate today = LocalDate.now();
+                        Period age = Period.between(birthdate, today);
+                        Log.e("anyTextage",""+age.getYears());
                         // in the above statement, getHeaderText
                         // is the selected date preview from the
                         // dialog
@@ -101,17 +113,17 @@ public class signup_Form_2 extends AppCompatActivity
                         break;
                     }
                 }
-                if (location1.equalsIgnoreCase(location2))
-                {
+//                if (location1.equalsIgnoreCase(location2))
+//                {
                     Intent next = new Intent(signup_Form_2.this, signup_Form_3.class);
                     startActivity(next);
                     overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    finish();
-                }
-                else
-                {
-                    Toast.makeText(signup_Form_2.this, "Please Select Valid Location", Toast.LENGTH_SHORT).show();
-                }
+//                    finish();
+//                }
+//                else
+//                {
+//                    Toast.makeText(signup_Form_2.this, "Please Select Valid Location", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
         UploadImage.setOnClickListener(new View.OnClickListener() {

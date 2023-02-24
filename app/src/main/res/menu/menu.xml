@@ -10,10 +10,10 @@
             android:title="Home" />
         <item
             android:id="@+id/Applied_Events"
-            android:title="Applied Events"/>
+            android:title="Joined Events"/>
         <item
             android:id="@+id/Posted_Events"
-            android:title="Posted Events"/>
+            android:title="Created Events"/>
         <item
             android:id="@+id/Edit_Profile"
             android:title="Edit Profile"/>
