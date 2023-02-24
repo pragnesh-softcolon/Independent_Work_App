@@ -26,6 +26,7 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/CreatePost"
         android:layout_width="wrap_content"
+        android:contentDescription="Create New Event"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add_black_24dp"
         android:layout_gravity="bottom|right"
