@@ -1,6 +1,7 @@
 package com.example.independentworkapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,7 +29,8 @@ public class signup_Form_3 extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_form3);
-        error=findViewById(R.id.error_messsage);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        error=findViewById(R.id.error_password);
         btn_next=findViewById(R.id.btn_next);
         Password=findViewById(R.id.Password);
         ConformPassword=findViewById(R.id.ConformPassword);

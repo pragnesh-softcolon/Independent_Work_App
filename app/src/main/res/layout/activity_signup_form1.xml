@@ -68,15 +68,26 @@
                 android:hint="First Name">
 
 
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/Fname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/editText"
                     android:maxLines="1"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
-
+            <TextView
+                android:id="@+id/error_Fname"
+                android:layout_below="@id/ed_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="First name is required"
+                android:visibility="gone"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_10sdp" />
             <TextView
                 android:id="@+id/Lname_tv"
                 android:layout_width="wrap_content"
@@ -104,6 +115,16 @@
                     android:maxLines="1"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/error_Lname"
+                android:layout_below="@id/ed_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="Last name is required"
+                android:visibility="gone"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_10sdp" />
 
             <TextView
                 android:id="@+id/gendar_tv"

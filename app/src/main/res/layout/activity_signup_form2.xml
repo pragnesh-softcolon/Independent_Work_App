@@ -64,7 +64,16 @@
                     android:inputType="none"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
-
+            <TextView
+                android:id="@+id/error_Fname"
+                android:layout_below="@id/ed_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="Date of birth is required"
+                android:visibility="visible"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_10sdp" />
             <TextView
                 android:id="@+id/Lname_tv"
                 android:layout_width="wrap_content"
@@ -96,12 +105,16 @@
                     android:maxLines="1"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
-
+            <TextView
+                android:id="@+id/error_phone"
+                android:layout_below="@id/ed_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="Phone Number is not valid"
+                android:visibility="visible"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_10sdp" />
 
             <TextView
                 android:id="@+id/Location_tv"
@@ -131,7 +144,16 @@
                     android:maxLines="1"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
-
+            <TextView
+                android:id="@+id/error_Locaton"
+                android:layout_below="@id/ed_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="Your Locaton is required"
+                android:visibility="visible"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_10sdp" />
             <TextView
                 android:id="@+id/gendar_tv"
                 android:layout_width="wrap_content"
@@ -146,7 +168,7 @@
                 <android.widget.Button
                     android:background="@color/blue"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:textColor="#C7EBF9"
+                    android:textColor="@color/white"
                     android:id="@+id/UploadImage"
                     android:clickable="false"
                     android:paddingRight="@dimen/_15sdp"
@@ -155,11 +177,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Click to upload" />
-
-
-
+            <TextView
+                android:id="@+id/error_image"
+                android:layout_below="@id/UploadImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="Image is required        "
+                android:visibility="visible"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_10sdp" />
         </LinearLayout>
-
         <RelativeLayout
             android:gravity="center"
             android:layout_marginLeft="@dimen/_20sdp"

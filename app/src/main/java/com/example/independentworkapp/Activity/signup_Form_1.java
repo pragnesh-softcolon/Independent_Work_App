@@ -1,6 +1,7 @@
 package com.example.independentworkapp.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -20,6 +21,7 @@ public class signup_Form_1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_form1);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         Fname=findViewById(R.id.Fname);
         Lname=findViewById(R.id.Lname);
         male=findViewById(R.id.btn_gendar_male);

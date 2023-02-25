@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -24,7 +25,8 @@ public class HomeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         // Inflate the layout for this fragment
-        view=inflater.inflate(R.layout.fragment_home, container, false);;
+        view=inflater.inflate(R.layout.fragment_home, container, false);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         floatingActionButton=view.findViewById(R.id.CreatePost);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

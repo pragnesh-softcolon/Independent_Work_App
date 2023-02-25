@@ -3,6 +3,7 @@ package com.example.independentworkapp.Activity;
 import static com.google.android.material.datepicker.MaterialDatePicker.*;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -55,13 +56,14 @@ public class signup_Form_2 extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_form2);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         btn_next=findViewById(R.id.btn_next);
         dob=findViewById(R.id.dob);
         UploadImage=findViewById(R.id.UploadImage);
         PhoneNumber=findViewById(R.id.PhoneNumber);
         Location=findViewById(R.id.Location);
         Builder materialDateBuilder = Builder.datePicker();
-        materialDateBuilder.setTitleText("SELECT A DATE");
+        materialDateBuilder.setTitleText("SELECT BIRTH DATE");
         final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
 //        dob.setShowSoftInputOnFocus(false);just another virtual accelator
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
@@ -87,10 +89,9 @@ public class signup_Form_2 extends AppCompatActivity
                         // button that is ok button update the
                         // selected date
                         dob.setText(materialDatePicker.getHeaderText());
-                        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy");
-
-                        // Parse birthdate into LocalDate object
+                        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
                         LocalDate birthdate = LocalDate.parse(materialDatePicker.getHeaderText(), inputFormatter);
+
 
                         // Calculate age based on birthdate
                         LocalDate today = LocalDate.now();

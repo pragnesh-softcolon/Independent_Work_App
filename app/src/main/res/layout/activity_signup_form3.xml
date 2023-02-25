@@ -60,12 +60,14 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
-                android:id="@+id/error_messsage"
-                android:textColor="#FF0000"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:id="@+id/error_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="Enter valid password"
+                android:visibility="visible"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_10sdp" />
             <TextView
                 android:id="@+id/Conform_Password"
                 android:layout_width="wrap_content"
@@ -96,6 +98,15 @@
                     android:maxLength="15"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/error_conform_passsword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:text="Enter valid password"
+                android:visibility="visible"
+                android:textColor="@color/Red"
+                android:textSize="@dimen/_10sdp" />
         </LinearLayout>
 
         <RelativeLayout
