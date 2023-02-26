@@ -22,10 +22,21 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.independentworkapp.Network.Apis;
+import com.example.independentworkapp.Network.SharedPrefs;
 import com.example.independentworkapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -41,11 +52,9 @@ public class CreateEvent extends AppCompatActivity
     Button btn_generate_invoice,btn_pay,btn_pay_status;
     LinearLayout invoiceLayout;
     TextView user_name,event_name,event_work,event_payment,event_members,event_address,event_date,event_other_details,payable_amount;
+    SharedPrefs sp;
 
-    public static final String USER_NAME="rzp_test_c9SDwoMtWVIMfK/";
-    public static final String PASSWORD="bnuXuiVoUsoonJgTN0jjkNGC";
-    public static final String BASEURL="https://api.razorpay.com/";
-    public static final String PAYMRNT="v1/payment_links";
+
     String referenceID;
     String currency = "INR";
     String acceptPartial = "true";
@@ -146,7 +155,7 @@ public class CreateEvent extends AppCompatActivity
                     LocalDate today = LocalDate.now();
                     Period days = Period.between(sDate, eDate);
                     int total= (Integer.parseInt(Payment) * Integer.parseInt(Members) )* (days.getDays()+1);
-                    Log.e("anyText",""+days.getDays());
+                    Log.e("anyText",""+days.getDays()+1);
                     PayableAmount=""+((total*10)/100);
                     payable_amount.setText("Total Payable Amount : "+PayableAmount);
                     invoiceLayout.setVisibility(View.VISIBLE);
@@ -165,16 +174,86 @@ public class CreateEvent extends AppCompatActivity
                 }
             }
         });
+        btn_pay_status.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                        checkPaymentStatus();
+            }
+        });
     }
 
-    private void paymentRequest()
-    {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, BASEURL+PAYMRNT,
+    private void checkPaymentStatus() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Apis.PAYMENT+"/"+sp.getPaymentId(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // Handle the response
-                        Log.e("anyText",response);
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        JsonParser jp = new JsonParser();
+                        JsonElement je = jp.parse(response);
+                        String prettyJsonString = gson.toJson(je);
+                        Log.e("anyText",prettyJsonString);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            JSONArray jsonArray = jsonObject.getJSONArray("payments");
+                            if (jsonArray.length()>0) {
+                                JSONObject jsonArrayObject = jsonArray.getJSONObject(0);
+                                String status = jsonArrayObject.getString("status");
+                                Toast.makeText(CreateEvent.this, "Payment captured.", Toast.LENGTH_SHORT).show();
+                                Log.e("anyText", "array : " + status);
+                            }
+                            else {
+                                Toast.makeText(CreateEvent.this, "Payment is not captured yet.", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle the error
+                        Log.e("anyText",""+error);
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Basic cnpwX3Rlc3RfYzlTRHdvTXRXVklNZks6Ym51WHVpVm9Vc29vbkpnVE4wamprTkdD");
+                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+
+
+        };
+
+// Add the request to the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        queue.add(stringRequest);
+    }
+
+    private void paymentRequest()
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Apis.PAYMENT,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Handle the response
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        JsonParser jp = new JsonParser();
+                        JsonElement je = jp.parse(response);
+                        String prettyJsonString = gson.toJson(je);
+                        Log.e("anyText",prettyJsonString);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String id=jsonObject.getString("id");
+                            sp.setPaymentId(id);
+                            Log.e("anyText",id);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
                         Toast.makeText(CreateEvent.this, "Payment Request Sent", Toast.LENGTH_SHORT).show();
                         btn_pay_status.setVisibility(View.VISIBLE);
                     }
@@ -253,6 +332,7 @@ public class CreateEvent extends AppCompatActivity
         btn_pay=findViewById(R.id.btn_pay);
         btn_pay_status=findViewById(R.id.btn_pay_status);
         invoiceLayout=findViewById(R.id.invoice_layout);
+        sp=new SharedPrefs(getApplicationContext());
     }
 
     @Override
