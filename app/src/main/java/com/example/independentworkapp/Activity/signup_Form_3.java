@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.independentworkapp.MainActivity;
 import com.example.independentworkapp.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import kotlin.text.Regex;
 
@@ -20,6 +21,7 @@ public class signup_Form_3 extends AppCompatActivity
 {
     Button btn_next;
     TextInputEditText Password,ConformPassword;
+    TextInputLayout ed_paassword,ed_conformPassword;
     TextView error;
     String password,conformPassword;
     Regex sampleRegex = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,15}$");
@@ -30,7 +32,8 @@ public class signup_Form_3 extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_form3);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        error=findViewById(R.id.error_password);
+        ed_paassword=findViewById(R.id.ed_paassword);
+        ed_conformPassword=findViewById(R.id.ed_conformPassword);
         btn_next=findViewById(R.id.btn_next);
         Password=findViewById(R.id.Password);
         ConformPassword=findViewById(R.id.ConformPassword);

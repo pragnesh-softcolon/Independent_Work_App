@@ -11,10 +11,12 @@ import android.widget.Button;
 
 import com.example.independentworkapp.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class signup_Form_1 extends AppCompatActivity {
     Button male,female,female2,btn_next;
     TextInputEditText Fname,Lname;
+    TextInputLayout ed_first_name,ed_last_name;
     String FirstName,LastName, Gender;
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -22,12 +24,7 @@ public class signup_Form_1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_form1);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        Fname=findViewById(R.id.Fname);
-        Lname=findViewById(R.id.Lname);
-        male=findViewById(R.id.btn_gendar_male);
-        female=findViewById(R.id.btn_gendar_female);
-        female2=findViewById(R.id.btn_gendar_female2);
-        btn_next=findViewById(R.id.btn_next);
+        views();
         male.setBackground(getResources().getDrawable(R.drawable.buttone_style));
         male.setTextColor(getResources().getColor(R.color.white));
         female.setBackground(getResources().getDrawable(R.drawable.gender_inactive));
@@ -70,6 +67,17 @@ public class signup_Form_1 extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void views() {
+        Fname=findViewById(R.id.Fname);
+        Lname=findViewById(R.id.Lname);
+        male=findViewById(R.id.btn_gendar_male);
+        female=findViewById(R.id.btn_gendar_female);
+        female2=findViewById(R.id.btn_gendar_female2);
+        btn_next=findViewById(R.id.btn_next);
+        ed_first_name=findViewById(R.id.ed_first_name);
+        ed_last_name=findViewById(R.id.ed_last_name);
     }
 
     @Override

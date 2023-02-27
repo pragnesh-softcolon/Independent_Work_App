@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,13 +41,14 @@
                 android:textSize="@dimen/_15ssp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_last_name"
+                android:id="@+id/ed_paassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Password_tv"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 app:passwordToggleEnabled="true"
+                app:errorEnabled="true"
                 android:hint="Password">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -60,32 +62,23 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
-                android:id="@+id/error_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:text="Enter valid password"
-                android:visibility="visible"
-                android:textColor="@color/Red"
-                android:textSize="@dimen/_10sdp" />
-            <TextView
                 android:id="@+id/Conform_Password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ed_last_name"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:text="Conform Password"
                 android:textSize="@dimen/_15ssp" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_Location"
+                android:id="@+id/ed_conformPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/Lname_tv"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:hint="Conform Password"
+                app:errorEnabled="true"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -98,15 +91,7 @@
                     android:maxLength="15"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:id="@+id/error_conform_passsword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:text="Enter valid password"
-                android:visibility="visible"
-                android:textColor="@color/Red"
-                android:textSize="@dimen/_10sdp" />
+
         </LinearLayout>
 
         <RelativeLayout

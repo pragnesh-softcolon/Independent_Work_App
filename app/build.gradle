@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'com.intuit.ssp:ssp-android:1.1.0'
     implementation 'com.intuit.sdp:sdp-android:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'

@@ -70,6 +70,7 @@
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
                 app:errorContentDescription="Phone Number required"
                 android:hint="Phone">
 
@@ -84,16 +85,6 @@
                     android:inputType="phone"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:id="@+id/error_phone"
-                android:layout_below="@id/ed_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:text="Phone Number is not valid"
-                android:visibility="gone"
-                android:textColor="@color/Red"
-                android:textSize="@dimen/_10sdp" />
             <TextView
                 android:id="@+id/pass_tv"
                 android:layout_width="wrap_content"
@@ -111,6 +102,7 @@
                 android:layout_marginRight="@dimen/_20sdp"
                 app:passwordToggleEnabled="true"
                 android:layout_height="wrap_content"
+                app:errorEnabled="true"
                 android:hint="Password">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -121,16 +113,6 @@
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:id="@+id/error_password"
-                android:layout_below="@id/ed_Password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:text="Invalid Password"
-                android:textColor="@color/Red"
-                android:visibility="gone"
-                android:textSize="@dimen/_10sdp" />
 
             <TextView
                 android:id="@+id/forget_pass"

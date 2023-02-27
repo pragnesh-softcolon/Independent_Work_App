@@ -39,6 +39,7 @@ public class signup_Form_2 extends AppCompatActivity
 {
     Button btn_next,UploadImage;
     TextInputEditText dob,PhoneNumber;
+    TextInputLayout ed_DOB,ed_phone,ed_Location;
     AutoCompleteTextView Location;
     String imageName="";
     String picturePath;
@@ -57,6 +58,9 @@ public class signup_Form_2 extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_form2);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        ed_DOB=findViewById(R.id.ed_DOB);
+        ed_Location=findViewById(R.id.ed_Location);
+        ed_phone=findViewById(R.id.ed_phone);
         btn_next=findViewById(R.id.btn_next);
         dob=findViewById(R.id.dob);
         UploadImage=findViewById(R.id.UploadImage);

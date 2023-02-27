@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,6 +57,9 @@ public class CreateEvent extends AppCompatActivity
     LinearLayout invoiceLayout;
     TextView user_name,event_name,event_work,event_payment,event_members,event_address,event_date,event_other_details,payable_amount;
     SharedPrefs sp;
+    Dialog dialog;
+    int i = 0;
+
 
 
     String referenceID;
@@ -62,6 +69,7 @@ public class CreateEvent extends AppCompatActivity
     String expireBy = "1691097357";
     String description = "Test payment";
     String name = "Independent Work App";
+
     String sms = "true";
     String notifyEmail = "true";
     String reminderEnable = "true";
@@ -183,6 +191,7 @@ public class CreateEvent extends AppCompatActivity
     }
 
     private void checkPaymentStatus() {
+        dialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Apis.PAYMENT+"/"+sp.getPaymentId(),
                 new Response.Listener<String>() {
                     @Override
@@ -197,15 +206,21 @@ public class CreateEvent extends AppCompatActivity
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray jsonArray = jsonObject.getJSONArray("payments");
                             if (jsonArray.length()>0) {
+                                dialog.dismiss();
                                 JSONObject jsonArrayObject = jsonArray.getJSONObject(0);
                                 String status = jsonArrayObject.getString("status");
                                 Toast.makeText(CreateEvent.this, "Payment captured.", Toast.LENGTH_SHORT).show();
+
                                 Log.e("anyText", "array : " + status);
+                                finish();
                             }
                             else {
+                                dialog.dismiss();
                                 Toast.makeText(CreateEvent.this, "Payment is not captured yet.", Toast.LENGTH_SHORT).show();
+
                             }
                         } catch (JSONException e) {
+                            dialog.dismiss();
                             throw new RuntimeException(e);
                         }
                     }
@@ -214,6 +229,7 @@ public class CreateEvent extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle the error
+                        dialog.dismiss();
                         Log.e("anyText",""+error);
                     }
                 }) {
@@ -236,6 +252,7 @@ public class CreateEvent extends AppCompatActivity
 
     private void paymentRequest()
     {
+        dialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Apis.PAYMENT,
                 new Response.Listener<String>() {
                     @Override
@@ -251,8 +268,11 @@ public class CreateEvent extends AppCompatActivity
                             String id=jsonObject.getString("id");
                             sp.setPaymentId(id);
                             Log.e("anyText",id);
+                            dialog.dismiss();
                         } catch (JSONException e) {
+                            dialog.dismiss();
                             throw new RuntimeException(e);
+
                         }
                         Toast.makeText(CreateEvent.this, "Payment Request Sent", Toast.LENGTH_SHORT).show();
                         btn_pay_status.setVisibility(View.VISIBLE);
@@ -262,6 +282,7 @@ public class CreateEvent extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle the error
+                        dialog.dismiss();
                         Log.e("anyText",""+error);
                     }
                 }) {
@@ -333,6 +354,11 @@ public class CreateEvent extends AppCompatActivity
         btn_pay_status=findViewById(R.id.btn_pay_status);
         invoiceLayout=findViewById(R.id.invoice_layout);
         sp=new SharedPrefs(getApplicationContext());
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.loading_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
     }
 
     @Override

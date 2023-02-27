@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/Baby_Blue"
-    app:cardCornerRadius="16dp"
+    app:cardCornerRadius="@dimen/_16sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp"
     app:cardElevation="5dp"
-    app:cardPreventCornerOverlap="true"
-    app:cardUseCompatPadding="true">
+    app:cardPreventCornerOverlap="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,21 +22,21 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="5dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="@dimen/_10sdp">
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
                 android:gravity="center_vertical"
-                android:layout_marginStart="5dp"
                 android:textColor="@color/black"
                 android:layout_height="match_parent"
-                android:text="User_name"
+                android:text="User name"
                 android:textSize="20dp"/>
         </LinearLayout>
         <TextView
+            android:contentDescription="event name"
             android:padding="5dp"
             android:textColor="@color/black"
-            android:id="@+id/etPloatNo"
+            android:id="@+id/etEventName"
             android:tooltipText="Plot Number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,39 +47,43 @@
         <TextView
             android:padding="5dp"
             android:textColor="@color/black"
-            android:id="@+id/etDate"
+            android:id="@+id/etWork"
             android:tooltipText="Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14dp"
             android:hint="Work" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="2">
-            <TextView
-                android:layout_weight="1"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:id="@+id/etChequeNo"
-                android:tooltipText="Cheque Number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14dp"
-                android:hint="Members" />
-
 
             <TextView
                 android:layout_weight="1"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:tooltipText="Amount"
-                android:id="@+id/etAmount"
+                android:id="@+id/etMember"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Members"
+                android:padding="5dp"
+                android:textColor="@color/black"
                 android:textSize="14dp"
-                android:hint="Start date-End Date" />
+                android:tooltipText="Cheque Number" />
+
+
+            <TextView
+                android:id="@+id/etDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="Start date &amp; End Date"
+                android:gravity="end"
+                android:hint="Start date to End Date"
+                android:padding="5dp"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                android:tooltipText="Amount" />
 
         </LinearLayout>
 
@@ -85,6 +91,7 @@
 
         <TextView
             android:padding="5dp"
+            android:contentDescription="event location"
             android:textColor="@color/black"
             android:tooltipText="Amount"
             android:id="@+id/Locatoin"

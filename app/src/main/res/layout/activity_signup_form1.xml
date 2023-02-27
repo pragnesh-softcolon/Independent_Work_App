@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fitsSystemWindows="true"
     tools:context=".Activity.signup_Form_1">
 
@@ -39,14 +39,6 @@
             android:background="@drawable/style1"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_350sdp">
-<!--            <TextView-->
-<!--                android:id="@+id/signup_info_tv1"-->
-<!--                android:textSize="@dimen/_20ssp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:text="Personal Information"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"/>-->
 
             <TextView
                 android:id="@+id/Fname_tv"
@@ -61,10 +53,9 @@
                 android:id="@+id/ed_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Fname_tv"
+                app:errorEnabled="true"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
-                android:background="@color/editText"
                 android:hint="First Name">
 
 
@@ -79,22 +70,11 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
-                android:id="@+id/error_Fname"
-                android:layout_below="@id/ed_first_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:text="First name is required"
-                android:visibility="gone"
-                android:textColor="@color/Red"
-                android:textSize="@dimen/_10sdp" />
-            <TextView
                 android:id="@+id/Lname_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ed_first_name"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:text="Last Name"
                 android:textSize="@dimen/_15ssp" />
 
@@ -102,7 +82,7 @@
                 android:id="@+id/ed_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/Lname_tv"
+                app:errorEnabled="true"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:hint="Last Name">
@@ -115,16 +95,6 @@
                     android:maxLines="1"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:id="@+id/error_Lname"
-                android:layout_below="@id/ed_last_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:text="Last name is required"
-                android:visibility="gone"
-                android:textColor="@color/Red"
-                android:textSize="@dimen/_10sdp" />
 
             <TextView
                 android:id="@+id/gendar_tv"
@@ -132,7 +102,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ed_last_name"
                 android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:text="Gender"
                 android:textSize="@dimen/_15ssp" />
 
