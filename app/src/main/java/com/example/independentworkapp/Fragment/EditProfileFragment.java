@@ -13,26 +13,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 
 import com.example.independentworkapp.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 
 public class EditProfileFragment extends Fragment
 {
+    View view;
     Dialog dialog;
     int i = 0;
+    TextInputLayout ed_Fname,ed_Lname,ed_gendar,ed_DOB,ed_Phone,ed_Location;
+    Button btn_update;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        dialog = new Dialog(getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.loading_dialog);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCancelable(false);
+        view=inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        views();
         dialog.show();
+        btn_update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         Handler hdlr=new Handler();
         new Thread(new Runnable()
         {
@@ -62,6 +70,20 @@ public class EditProfileFragment extends Fragment
             }
         }).start();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        return view;
+    }
+
+    private void views() {
+        ed_Fname=view.findViewById(R.id.ed_Fname);
+        ed_Lname=view.findViewById(R.id.ed_Lname);
+        ed_gendar=view.findViewById(R.id.ed_gendar);
+        ed_DOB=view.findViewById(R.id.ed_DOB);
+        ed_Phone=view.findViewById(R.id.ed_Phone);
+        ed_Location=view.findViewById(R.id.ed_Location);;
+        dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.loading_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
     }
 }

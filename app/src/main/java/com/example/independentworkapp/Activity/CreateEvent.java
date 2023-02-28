@@ -32,6 +32,7 @@ import com.example.independentworkapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -52,6 +53,7 @@ import java.util.UUID;
 public class CreateEvent extends AppCompatActivity
 {
     TextInputEditText eventName,eventWork,payment,members,timeing,startDate,endDate,location,mapLinkLocation,address,otherDetails;
+    TextInputLayout ed_eventName,ed_eventWork,ed_payment,ed_members,ed_timeing,ed_location,ed_mapLocation,ed_address,ed_startDate,ed_endDate,ed_otherDetails;
     String EventName,EventWork,Payment,Members,Timeing,StartDate,EndDate,Location,MapLinkLocation,Address,OtherDetails,PayableAmount;
     Button btn_generate_invoice,btn_pay,btn_pay_status;
     LinearLayout invoiceLayout;
@@ -127,19 +129,53 @@ public class CreateEvent extends AppCompatActivity
                 MapLinkLocation = mapLinkLocation.getText().toString().trim();
                 Address = address.getText().toString().trim();
                 OtherDetails = otherDetails.getText().toString().trim();
-                if (EventName.equals("") ||
-                        EventWork.equals("") ||
-                        Payment.equals("") ||
-                        Members.equals("") ||
-                        Timeing.equals("") ||
-                        Location.equals("") ||
-                        MapLinkLocation.equals("") ||
-                        Address.equals("") ||
-                        StartDate.equals("") ||
-                        EndDate.equals("")
-                )
-                {
-                    Toast.makeText(CreateEvent.this, "Please fill all the fields", Toast.LENGTH_SHORT).show();
+                ed_eventName.setError(null);
+                ed_eventWork.setError(null);
+                ed_payment.setError(null);
+                ed_members.setError(null);
+                ed_timeing.setError(null);
+                ed_location.setError(null);
+                ed_mapLocation.setError(null);
+                ed_address.setError(null);
+                ed_startDate.setError(null);
+                ed_endDate.setError(null);
+                if (EventName.equals("")) {
+                    ed_eventName.setError("Event Name is required");
+                    eventName.requestFocus();
+                }
+                else if(EventWork.equals("")){
+                    ed_eventWork.setError("Event Work is required");
+                    eventWork.requestFocus();
+                }
+                else if(Payment.equals("")){
+                    ed_payment.setError("Payment is required");
+                    payment.requestFocus();
+                }
+                else if(Members.equals("") ){
+                    ed_members.setError("Members is required");
+                    members.requestFocus();
+                }
+                else if(Timeing.equals("")){
+                    ed_timeing.setError("Timeing is required");
+                    timeing.requestFocus();
+                }
+                else if(Location.equals("")){
+                    ed_location.setError("Location is required");
+                    location.requestFocus();
+                }
+                else if(MapLinkLocation.equals("")){
+                    ed_mapLocation.setError("Map Link Location is required");
+                    mapLinkLocation.requestFocus();
+                }
+                else if(Address.equals("") ){
+                    ed_address.setError("Address is required");
+                    address.requestFocus();
+                }
+                else if(StartDate.equals("") ){
+                    ed_startDate.setError("Start Date is required");
+                }
+                else if(EndDate.equals("")){
+                   ed_endDate.setError("End Date is required");
                 }
                 else
                 {
@@ -168,9 +204,6 @@ public class CreateEvent extends AppCompatActivity
                     payable_amount.setText("Total Payable Amount : "+PayableAmount);
                     invoiceLayout.setVisibility(View.VISIBLE);
                 }
-
-
-
             }
         });
         btn_pay.setOnClickListener(new View.OnClickListener() {
@@ -353,6 +386,17 @@ public class CreateEvent extends AppCompatActivity
         btn_pay=findViewById(R.id.btn_pay);
         btn_pay_status=findViewById(R.id.btn_pay_status);
         invoiceLayout=findViewById(R.id.invoice_layout);
+        ed_eventName=findViewById(R.id.ed_eventName);
+        ed_eventWork=findViewById(R.id.ed_eventWork);
+        ed_payment=findViewById(R.id.ed_payment);
+        ed_members=findViewById(R.id.ed_members);
+        ed_timeing=findViewById(R.id.ed_timeing);
+        ed_location=findViewById(R.id.ed_location);
+        ed_mapLocation=findViewById(R.id.ed_mapLocation);
+        ed_address=findViewById(R.id.ed_address);
+        ed_startDate=findViewById(R.id.ed_startDate);
+        ed_endDate=findViewById(R.id.ed_endDate);
+        ed_otherDetails=findViewById(R.id.ed_otherDetails);
         sp=new SharedPrefs(getApplicationContext());
         dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

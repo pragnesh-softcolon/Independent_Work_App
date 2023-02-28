@@ -19,7 +19,7 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField"
+                    android:id="@+id/ed_eventName"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
                         android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField2"
+                    android:id="@+id/ed_eventWork"
                     app:errorEnabled="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                     android:weightSum="2"
                     android:orientation="horizontal">
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/outlinedTextField3"
+                        android:id="@+id/ed_payment"
                         app:errorEnabled="true"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                             android:layout_height="wrap_content" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/outlinedTextField4"
+                        android:id="@+id/ed_members"
                         app:errorEnabled="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField10"
+                    android:id="@+id/ed_timeing"
                     app:errorEnabled="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                     android:weightSum="2"
                     android:orientation="horizontal">
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/outlinedTextField5"
+                        android:id="@+id/ed_location"
                         app:errorEnabled="true"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                             android:layout_height="wrap_content" />
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/outlinedTextField6"
+                        android:id="@+id/ed_mapLocation"
                         app:errorEnabled="true"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField7"
+                    android:id="@+id/ed_address"
                     app:errorEnabled="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
                 android:weightSum="2"
                 android:orientation="horizontal">
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/start_date"
+                    android:id="@+id/ed_startDate"
                     android:layout_weight="1"
                     app:errorEnabled="true"
                     android:layout_width="match_parent"
@@ -180,7 +180,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/end_date"
+                    android:id="@+id/ed_endDate"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_weight="1"
                     app:errorEnabled="true"
@@ -200,9 +200,8 @@
                         android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField9"
+                    android:id="@+id/ed_otherDetails"
                     app:errorEnabled="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -19,12 +19,14 @@ import com.example.independentworkapp.R;
 
 public class AppliedEventFragment extends Fragment {
     Dialog dialog;
+    View view;
     int i = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        view =inflater.inflate(R.layout.fragment_edit_profile, container, false);
         dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.loading_dialog);
@@ -60,6 +62,6 @@ public class AppliedEventFragment extends Fragment {
             }
         }).start();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_applied_event, container, false);
+        return view;
     }
 }
