@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.independentworkapp.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -17,7 +18,7 @@ public class signup_Form_1 extends AppCompatActivity {
     Button male,female,female2,btn_next;
     TextInputEditText Fname,Lname;
     TextInputLayout ed_first_name,ed_last_name;
-    String FirstName,LastName, Gender;
+    String FirstName,LastName, Gender="MALE";
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class signup_Form_1 extends AppCompatActivity {
                 male.setTextColor(getResources().getColor(R.color.white));
                 female.setBackground(getResources().getDrawable(R.drawable.gender_inactive));
                 female.setTextColor(getResources().getColor(R.color.blue));
+                Gender="MALE";
             }
         });
         female.setOnClickListener(new View.OnClickListener()
@@ -55,16 +57,37 @@ public class signup_Form_1 extends AppCompatActivity {
                 female.setTextColor(getResources().getColor(R.color.white));
                 female2.setBackground(getResources().getDrawable(R.drawable.buttone_style));
                 female2.setTextColor(getResources().getColor(R.color.white));
+                Gender="FEMALE";
             }
         });
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                Intent next=new Intent(signup_Form_1.this,signup_Form_2.class);
-                startActivity(next);
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                finish();
+                FirstName = Fname.getText().toString().trim();
+                LastName = Lname.getText().toString().trim();
+                if (FirstName.isEmpty())
+                {
+                    ed_first_name.setError("Enter First Name");
+                    ed_first_name.requestFocus();
+                }
+                else if(LastName.isEmpty())
+                {
+                    ed_first_name.setError(null);
+                    ed_last_name.setError("Enter Last Name");
+                    ed_last_name.requestFocus();
+                }
+                else {
+//                    Toast.makeText(signup_Form_1.this, FirstName, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(signup_Form_1.this, LastName, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(signup_Form_1.this, Gender, Toast.LENGTH_SHORT).show();
+                    Intent next = new Intent(signup_Form_1.this, signup_Form_2.class);
+                    next.putExtra("FirstName", FirstName);
+                    next.putExtra("LastName", LastName);
+                    next.putExtra("Gender", Gender);
+                    startActivity(next);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                }
             }
         });
     }

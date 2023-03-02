@@ -4,25 +4,56 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.independentworkapp.MainActivity;
+import com.example.independentworkapp.Network.Apis;
+import com.example.independentworkapp.Network.SharedPrefs;
 import com.example.independentworkapp.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class login extends AppCompatActivity
 {
+    ScrollView layout;
     TextInputEditText phone,password;
     TextInputLayout ed_phone,ed_Password;
     TextView signup;
@@ -35,8 +66,42 @@ public class login extends AppCompatActivity
         setContentView(R.layout.activity_login);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         views();
+        phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    ed_phone.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                ed_Password.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         btn_signIn.setOnClickListener(view -> {
-            if (Objects.requireNonNull(phone.getText()).toString().isEmpty() || phone.getText().toString().length()<10)
+            if (Objects.requireNonNull(phone.getText()).toString().trim().isEmpty() || phone.getText().toString().trim().length()<10)
             {
                 ed_phone.setError("Please enter a valid phone number");
                 phone.requestFocus();
@@ -51,39 +116,8 @@ public class login extends AppCompatActivity
             {
                 ed_phone.setError(null);
                 ed_Password.setError(null);
-                dialog.show();
-                Handler hdlr=new Handler();
-        new Thread(new Runnable()
-        {
-            public void run()
-            {
-                while (i < 100)
-                {
-                    i += 2;
-                    hdlr.post(new Runnable()
-                    {
-                        public void run()
-                        {
-                            if(i==30)
-                            {
-                                dialog.dismiss();
-                                Intent mainActivity = new Intent(login.this, MainActivity.class);
-                                startActivity(mainActivity);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                finish();
-                            }
-                        }
-                    });
-                    try
-                    {
-                        Thread.sleep(200);
-                    } catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+
+                login();
 
             }
         });
@@ -108,5 +142,67 @@ public class login extends AppCompatActivity
         dialog.setContentView(R.layout.loading_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
+        layout=findViewById(R.id.layout);
+    }
+    public void login() {
+        dialog.show();
+        Map<String,String> params = new HashMap<>();
+        params.put("phone",phone.getText().toString().trim());
+        params.put("password",password.getText().toString());
+        final JsonObjectRequest request = new JsonObjectRequest(Apis.LOGIN,new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        JsonParser jp = new JsonParser();
+                        JsonElement je = jp.parse(String.valueOf(response));
+                        String prettyJsonString = gson.toJson(je);
+                        Log.e("anyText",prettyJsonString);
+                        try {
+                            if (response.getString("message").equals("User does not exist"))
+                            {
+                                ed_phone.setError(" ");
+                                phone.requestFocus();
+                                showError("Phone Number does not exist");
+                            }
+                            else if (response.getString("message").equals("Invalid password"))
+                            {
+                                ed_phone.setError(null);
+                                ed_Password.setError(" ");
+                                password.requestFocus();
+                                showError("Invalid Password");
+                            }
+                            else if (response.getString("message").equals("User Login Successfully"))
+                            {
+                                ed_phone.setError(null);
+                                ed_Password.setError(null);
+                                new SharedPrefs(login.this).setUserToken(response.getString("token"));
+//                                Toast.makeText(login.this, new SharedPrefs(login.this).getUserToken(), Toast.LENGTH_SHORT).show();
+                            }
+//                            Toast.makeText(login.this, "" + response, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            showError("Something Went Wrong,Try After Some time");
+//                            Toast.makeText(login.this, "Something Went Wrong,Try After Some time", Toast.LENGTH_SHORT).show();
+                            throw new RuntimeException(e);
+                        }
+                        dialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showError("Something Went Wrong,Try After Some time");
+//                Toast.makeText(login.this, "Something Went Wrong,Try After Some time", Toast.LENGTH_SHORT).show();
+                Log.e("anyText", "Volly error " + error);
+                dialog.dismiss();
+            }
+        });
+        request.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
+    public void showError(String message)
+    {
+        Snackbar snackbar = Snackbar.make(layout,message,Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 }

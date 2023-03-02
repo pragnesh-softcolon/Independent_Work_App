@@ -121,6 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/editText"
+                   android:inputType="none"
                     android:paddingLeft="@dimen/_10sdp"
                     android:maxLines="1"
                     android:textColor="@color/black" />
@@ -155,7 +156,7 @@
                 android:gravity="center"
                 android:layout_marginStart="@dimen/_20sdp"
                 android:text="Image is required        "
-                android:visibility="visible"
+                android:visibility="gone"
                 android:textColor="@color/Red"
                 android:textSize="@dimen/_10sdp" />
         </LinearLayout>

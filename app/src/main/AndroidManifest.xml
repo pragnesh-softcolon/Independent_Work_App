@@ -14,71 +14,74 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:theme="@style/Theme.IndependentWorkApp"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".splashScreen"
+            android:exported="false" />
+        <activity
             android:name=".Activity.JoinedPostDetail"
-            android:screenOrientation = "portrait"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Activity.EventPostDetail"
-            android:screenOrientation = "portrait"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Activity.EventDetail"
-            android:screenOrientation = "portrait"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Activity.CreateEvent"
-            android:screenOrientation = "portrait"
+            android:exported="false"
             android:label="Create Event"
-            android:theme="@style/MyCustome"
-            android:exported="false">
+            android:screenOrientation="portrait"
+            android:theme="@style/MyCustome">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Activity.signup_Form_3"
-            android:screenOrientation = "portrait"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Activity.signup_Form_2"
-            android:screenOrientation = "portrait"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Activity.signup_Form_1"
-            android:screenOrientation = "portrait"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation = "portrait"
             android:exported="false"
+            android:screenOrientation="portrait"
             android:theme="@style/MyCustome">
             <meta-data
                 android:name="android.app.lib_name"
@@ -86,8 +89,8 @@
         </activity>
         <activity
             android:name=".Activity.login"
-            android:screenOrientation = "portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
