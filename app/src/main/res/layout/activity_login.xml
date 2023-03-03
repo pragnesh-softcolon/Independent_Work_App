@@ -110,6 +110,7 @@
                     android:layout_width="match_parent"
                     android:background="@color/editText"
                     android:maxLines="1"
+                    android:inputType="textPassword"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>

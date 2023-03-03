@@ -79,7 +79,8 @@ public class EditProfileFragment extends Fragment
         ed_gendar=view.findViewById(R.id.ed_gendar);
         ed_DOB=view.findViewById(R.id.ed_DOB);
         ed_Phone=view.findViewById(R.id.ed_Phone);
-        ed_Location=view.findViewById(R.id.ed_Location);;
+        ed_Location=view.findViewById(R.id.ed_Location);
+        btn_update=view.findViewById(R.id.btn_update_profile);
         dialog = new Dialog(getContext());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.loading_dialog);

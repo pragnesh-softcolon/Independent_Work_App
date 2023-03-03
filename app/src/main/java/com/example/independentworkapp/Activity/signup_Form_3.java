@@ -152,6 +152,9 @@ public class signup_Form_3 extends AppCompatActivity
                             Log.e("anyText","obj is "+obj);
                             dialog.dismiss();
                             Intent next = new Intent(signup_Form_3.this, login.class);
+                            next.putExtra("phone",Phone);
+                            next.putExtra("password",conformPassword);
+                            next.putExtra("register","Register");
                             startActivity(next);
                             finish();
                         } catch (JSONException e) {
@@ -190,8 +193,8 @@ public class signup_Form_3 extends AppCompatActivity
     public void onBackPressed()
     {
         super.onBackPressed();
-        Intent form1=new Intent(signup_Form_3.this,signup_Form_2.class);
-        startActivity(form1);
+//        Intent form1=new Intent(signup_Form_3.this,signup_Form_2.class);
+//        startActivity(form1);
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
         finish();
     }

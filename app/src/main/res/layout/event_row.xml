@@ -8,7 +8,8 @@
     app:cardCornerRadius="@dimen/_16sdp"
     android:layout_marginStart="@dimen/_10sdp"
     android:layout_marginEnd="@dimen/_10sdp"
-    android:layout_marginTop="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_5sdp"
     app:cardElevation="5dp"
     app:cardPreventCornerOverlap="true">
 
@@ -36,8 +37,7 @@
             android:contentDescription="event name"
             android:padding="5dp"
             android:textColor="@color/black"
-            android:id="@+id/etEventName"
-            android:tooltipText="Plot Number"
+            android:id="@+id/EventName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14dp"
@@ -47,8 +47,7 @@
         <TextView
             android:padding="5dp"
             android:textColor="@color/black"
-            android:id="@+id/etWork"
-            android:tooltipText="Date"
+            android:id="@+id/Work"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14dp"
@@ -62,43 +61,57 @@
 
             <TextView
                 android:layout_weight="1"
-                android:id="@+id/etMember"
+                android:id="@+id/Member"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Members"
                 android:padding="5dp"
                 android:textColor="@color/black"
-                android:textSize="14dp"
-                android:tooltipText="Cheque Number" />
+                android:textSize="14dp" />
 
 
-            <TextView
-                android:id="@+id/etDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="Start date &amp; End Date"
-                android:gravity="end"
-                android:hint="Start date to End Date"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:textSize="14dp"
-                android:tooltipText="Amount" />
+
 
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="Start date &amp; End Date"
+            android:hint="Start date to End Date"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textSize="14dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
 
         <TextView
+            android:layout_weight="1"
             android:padding="5dp"
             android:contentDescription="event location"
             android:textColor="@color/black"
-            android:tooltipText="Amount"
             android:id="@+id/Locatoin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14dp"
             android:hint="Locaton"
             android:layout_marginBottom="@dimen/_10sdp"/>
+        <TextView
+            android:id="@+id/Payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="Payment"
+            android:gravity="center"
+            android:hint="Payment"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:textSize="14dp"/>
+    </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -46,4 +46,12 @@ public class SharedPrefs
                 APP_NAME, Context.MODE_PRIVATE);
         return sharedpreferences.getString("User_Token", "");
     }
+    public void logoutApp()
+    {
+        SharedPreferences sharedpreferences = context.getSharedPreferences(
+                APP_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.clear().apply();
+
+    }
 }

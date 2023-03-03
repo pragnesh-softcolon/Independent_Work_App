@@ -237,8 +237,8 @@ public class signup_Form_2 extends AppCompatActivity
     public void onBackPressed()
     {
         super.onBackPressed();
-        Intent form1=new Intent(signup_Form_2.this,signup_Form_1.class);
-        startActivity(form1);
+//        Intent form1=new Intent(signup_Form_2.this,signup_Form_1.class);
+//        startActivity(form1);
         overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
         finish();
     }

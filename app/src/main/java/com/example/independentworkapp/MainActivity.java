@@ -20,6 +20,7 @@ import com.example.independentworkapp.Fragment.AppliedEventFragment;
 import com.example.independentworkapp.Fragment.EditProfileFragment;
 import com.example.independentworkapp.Fragment.HomeFragment;
 import com.example.independentworkapp.Fragment.PostedEventFragment;
+import com.example.independentworkapp.Network.SharedPrefs;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
@@ -82,12 +83,11 @@ public class MainActivity extends AppCompatActivity
                     }
                     case R.id.mlogout:
                     {
-                        Intent BackToLogin = new Intent(getApplicationContext(), login.class);
+                        new SharedPrefs(MainActivity.this).logoutApp();
+                        Intent BackToLogin = new Intent(MainActivity.this, login.class);
                         startActivity(BackToLogin);
-//                        overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
-//                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
                         finish();
-                        Toast.makeText(MainActivity.this, "Logged out Going to Login Page", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity.this, "Logged out Going to Login Page", Toast.LENGTH_SHORT).show();
                         break;
                     }
                     default:

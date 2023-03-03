@@ -1,4 +1,5 @@
 package com.example.independentworkapp.Activity;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -30,13 +31,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.independentworkapp.Fragment.HomeFragment;
 import com.example.independentworkapp.MainActivity;
 import com.example.independentworkapp.Network.Apis;
 import com.example.independentworkapp.Network.SharedPrefs;
 import com.example.independentworkapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -66,6 +71,24 @@ public class login extends AppCompatActivity
         setContentView(R.layout.activity_login);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         views();
+        try {
+            if (getIntent().getStringExtra("register").equals("Register"))
+            {
+                dialog.show();
+                phone.setText(getIntent().getStringExtra("phone"));
+                password.setText(getIntent().getStringExtra("password"));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        login();
+                    }
+                }, 1000);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
         phone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -177,6 +200,11 @@ public class login extends AppCompatActivity
                                 ed_phone.setError(null);
                                 ed_Password.setError(null);
                                 new SharedPrefs(login.this).setUserToken(response.getString("token"));
+                                subscribe();
+                                Intent i = new Intent(login.this, MainActivity.class);
+                                startActivity(i);
+                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                                finish();
 //                                Toast.makeText(login.this, new SharedPrefs(login.this).getUserToken(), Toast.LENGTH_SHORT).show();
                             }
 //                            Toast.makeText(login.this, "" + response, Toast.LENGTH_SHORT).show();
@@ -204,5 +232,28 @@ public class login extends AppCompatActivity
     {
         Snackbar snackbar = Snackbar.make(layout,message,Snackbar.LENGTH_SHORT);
         snackbar.show();
+    }
+    private void subscribe()
+    {
+//        weather1
+        FirebaseMessaging.getInstance().subscribeToTopic("IndependentWorkApp")
+                .addOnCompleteListener(new OnCompleteListener<Void>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = "Subscribed";
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(login.this, msg, Toast.LENGTH_SHORT).show();
+                            msg = "Subscribe failed";
+                        }
+                        else
+                        {
+                            Toast.makeText(login.this, msg, Toast.LENGTH_SHORT).show();
+                            msg="subscribe done";
+                        }
+                        Log.d("TAG", msg);
+//                        Toast.makeText(NumberVerification.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "2879313678",
+    "project_id": "mahadev-4483c",
+    "storage_bucket": "mahadev-4483c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2879313678:android:7ff88e7fba41a7ce36295f",
+        "android_client_info": {
+          "package_name": "com.example.independentworkapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2879313678-tsi7l433ut5e68vnm9sfiia32b1fm93d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg80ZHKbGh-L_fynOILcNEzHuXkyvq9L4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2879313678-tsi7l433ut5e68vnm9sfiia32b1fm93d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2879313678:android:0203b664163ad21336295f",
+        "android_client_info": {
+          "package_name": "com.softcolon.tictactoe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2879313678-tsi7l433ut5e68vnm9sfiia32b1fm93d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCg80ZHKbGh-L_fynOILcNEzHuXkyvq9L4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2879313678-tsi7l433ut5e68vnm9sfiia32b1fm93d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
