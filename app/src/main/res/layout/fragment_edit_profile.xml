@@ -69,10 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="@dimen/_10sdp"
-                    android:inputType="none"
-                    android:focusable="false"
-                    android:cursorVisible="false"
-                    android:focusableInTouchMode="true"
+                    android:maxLines="1"
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
@@ -94,7 +91,11 @@
                         android:id="@+id/DOB"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="none"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout

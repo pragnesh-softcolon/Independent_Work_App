@@ -6,10 +6,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class GetCreatedEvent {
-
-    @SerializedName("work")
-    @Expose
-    private String work;
     @SerializedName("_id")
     @Expose
     private String id;
@@ -19,15 +15,27 @@ public class GetCreatedEvent {
     @SerializedName("user")
     @Expose
     private String user;
+    @SerializedName("work")
+    @Expose
+    private String work;
+    @SerializedName("paymentPerDay")
+    @Expose
+    private Integer paymentPerDay;
     @SerializedName("payment")
     @Expose
     private String payment;
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("paymentID")
+    @Expose
+    private String paymentID;
     @SerializedName("Location")
     @Expose
     private String location;
+    @SerializedName("Address")
+    @Expose
+    private String address;
     @SerializedName("start_date")
     @Expose
     private String startDate;
@@ -58,17 +66,6 @@ public class GetCreatedEvent {
     @SerializedName("__v")
     @Expose
     private Integer v;
-    @SerializedName("paymentID")
-    @Expose
-    private String paymentID;
-
-    public String getWork() {
-        return work;
-    }
-
-    public void setWork(String work) {
-        this.work = work;
-    }
 
     public String getId() {
         return id;
@@ -94,6 +91,22 @@ public class GetCreatedEvent {
         this.user = user;
     }
 
+    public String getWork() {
+        return work;
+    }
+
+    public void setWork(String work) {
+        this.work = work;
+    }
+
+    public Integer getPaymentPerDay() {
+        return paymentPerDay;
+    }
+
+    public void setPaymentPerDay(Integer paymentPerDay) {
+        this.paymentPerDay = paymentPerDay;
+    }
+
     public String getPayment() {
         return payment;
     }
@@ -110,12 +123,28 @@ public class GetCreatedEvent {
         this.status = status;
     }
 
+    public String getPaymentID() {
+        return paymentID;
+    }
+
+    public void setPaymentID(String paymentID) {
+        this.paymentID = paymentID;
+    }
+
     public String getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getStartDate() {
@@ -196,14 +225,6 @@ public class GetCreatedEvent {
 
     public void setV(Integer v) {
         this.v = v;
-    }
-
-    public String getPaymentID() {
-        return paymentID;
-    }
-
-    public void setPaymentID(String paymentID) {
-        this.paymentID = paymentID;
     }
 
 }

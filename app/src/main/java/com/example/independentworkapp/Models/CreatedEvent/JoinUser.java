@@ -23,7 +23,7 @@ public class JoinUser {
     private String dateOfBirth;
     @SerializedName("phone")
     @Expose
-    private Integer phone;
+    private Long phone;
     @SerializedName("Location")
     @Expose
     private String location;
@@ -71,11 +71,11 @@ public class JoinUser {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Integer getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 

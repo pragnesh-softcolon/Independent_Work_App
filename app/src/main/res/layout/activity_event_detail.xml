@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/layout"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,7 +29,11 @@
                     android:layout_width="match_parent"
                     android:maxLines="1"
                     android:maxLength="30"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/outlinedTextField2"
@@ -41,7 +46,11 @@
                     android:id="@+id/event_work"
                     android:layout_width="match_parent"
                     android:maxLength="200"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -61,8 +70,11 @@
                         android:id="@+id/event_payment"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:inputType="numberDecimal"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextField4"
@@ -77,8 +89,11 @@
                         android:id="@+id/event_members"
                         android:layout_weight="1"
                         android:layout_width="match_parent"
-                        android:inputType="number"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -93,7 +108,11 @@
                     android:id="@+id/event_time"
                     android:layout_width="match_parent"
                     android:maxLength="200"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
@@ -115,7 +134,11 @@
                         android:layout_weight="1"
                         android:maxLines="1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/outlinedTextField6"
@@ -131,7 +154,11 @@
                         android:layout_weight="1"
                         android:maxLines="1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:focusableInTouchMode="true"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:inputType="none"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
             <com.google.android.material.textfield.TextInputLayout
@@ -148,7 +175,11 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="200"/>
+                    android:maxLength="200"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
             <LinearLayout
                 android:layout_marginTop="@dimen/_10sdp"
@@ -211,8 +242,23 @@
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="200"/>
+                    android:maxLength="200"
+                    android:focusableInTouchMode="true"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
+            <android.widget.Button
+                android:id="@+id/btn_apply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/forget_pass"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:background="@drawable/buttone_style"
+                android:text="Join Event"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

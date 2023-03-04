@@ -24,6 +24,8 @@ public class Apis
     public final static String SIGN_UP=BASE_URL+Constant.SIGN_UP;
     public final static String POST_EVENT=BASE_URL+Constant.POST_EVENT;
     public final static String VIEW_ALL_EVENT=BASE_URL+Constant.VIEW_ALL_EVENT;
+    public final static String VIEW_CREATED_EVENT=BASE_URL+Constant.VIEW_CREATED_EVENT;
+
     public final static String APPLY_EVENT=BASE_URL+Constant.APPLY_EVENT;
     public final static String UPDATE_PROFILE=BASE_URL+Constant.UPDATE_PROFILE;
     public static final String PAYMENT_BASE_URL="https://api.razorpay.com/";

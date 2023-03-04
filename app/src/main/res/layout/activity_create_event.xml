@@ -9,6 +9,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
         <ScrollView
             android:contentDescription="Scroll View"
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -207,7 +208,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_2sdp"
                     android:layout_weight="1"
-                    android:hint="Other Details(Optional)"
+                    android:hint="Event Description"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/event_otherDetails"

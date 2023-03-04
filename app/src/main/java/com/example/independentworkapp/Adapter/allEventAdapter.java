@@ -1,27 +1,29 @@
 package com.example.independentworkapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.independentworkapp.Activity.EventDetail;
 import com.example.independentworkapp.Fragment.HomeFragment;
 import com.example.independentworkapp.Models.AllEvents.GetAllEvent;
 import com.example.independentworkapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class allEventAdapter extends RecyclerView.Adapter<allEventAdapter.MyViewHolder>
 {
     Context context;
     List<GetAllEvent> eventData;
-    public allEventAdapter(){
-
-    }
 
     public allEventAdapter(Context context, List<GetAllEvent> eventData){
         this.context=context;
@@ -41,7 +43,11 @@ public class allEventAdapter extends RecyclerView.Adapter<allEventAdapter.MyView
         GetAllEvent event = eventData.get(position);
         holder.name.setText(event.getUser().getFirstName()+" "+event.getUser().getLastName());
         holder.EventName.setText("Event Name : "+event.getName());
+//        int mem=event.getMembers();
+//        int join = event.getJoinUser().size();
+//        int member=mem-join;
         holder.Work.setText("Work : "+event.getWork());
+//        holder.Member.setText("Need "+member+" member");
         holder.Member.setText("Need "+event.getMembers().toString()+" Members");
         holder.Date.setText("Event Duration : "+event.getStartDate()+" to "+event.getEndDate());
         holder.Location.setText("Location : "+event.getLocation());
@@ -55,8 +61,10 @@ public class allEventAdapter extends RecyclerView.Adapter<allEventAdapter.MyView
         return position;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name,EventName,Work,Member,Date,Location,Payment;
+        CardView card;
+        String id,eventName,eventWork,payment,timeing,members,startDate,endDate,location,mapLinkLocation,address,otherDetails;
         public MyViewHolder(@NonNull View v) {
             super(v);
             name=v.findViewById(R.id.name);
@@ -66,6 +74,28 @@ public class allEventAdapter extends RecyclerView.Adapter<allEventAdapter.MyView
             Date=v.findViewById(R.id.Date);
             Location=v.findViewById(R.id.Locatoin);
             Payment=v.findViewById(R.id.Payment);
+            card=v.findViewById(R.id.card);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position=getAdapterPosition();
+            GetAllEvent event = eventData.get(position);
+            Intent intent=new Intent(context, EventDetail.class);
+            intent.putExtra("eventName",event.getName());
+            intent.putExtra("eventWork",event.getWork());
+            intent.putExtra("payment",event.getPaymentPerDay().toString());
+            intent.putExtra("members",event.getMembers().toString());
+            intent.putExtra("startDate",event.getStartDate());
+            intent.putExtra("endDate",event.getEndDate());
+            intent.putExtra("location",event.getLocation());
+            intent.putExtra("mapLinkLocation",event.getMapLocation());
+            intent.putExtra("address",event.getAddress());
+            intent.putExtra("otherDetails",event.getDescription());
+            intent.putExtra("timeing",event.getTime());
+            intent.putExtra("id",event.getId());
+            context.startActivity(intent);
         }
     }
 }

@@ -19,6 +19,8 @@
         tools:targetApi="31">
         <activity
             android:name=".Activity.login"
+            android:screenOrientation="portrait"
+            android:noHistory="true"
             android:exported="false" />
         <activity
             android:name=".Activity.JoinedPostDetail"
@@ -39,6 +41,8 @@
         <activity
             android:name=".Activity.EventDetail"
             android:exported="false"
+            android:theme="@style/MyCustome"
+            android:label="Event Detail"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"

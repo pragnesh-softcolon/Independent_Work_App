@@ -184,12 +184,14 @@ public class login extends AppCompatActivity
                         try {
                             if (response.getString("message").equals("User does not exist"))
                             {
+                                dialog.dismiss();
                                 ed_phone.setError(" ");
                                 phone.requestFocus();
                                 showError("Phone Number does not exist");
                             }
                             else if (response.getString("message").equals("Invalid password"))
                             {
+                                dialog.dismiss();
                                 ed_phone.setError(null);
                                 ed_Password.setError(" ");
                                 password.requestFocus();
@@ -197,23 +199,45 @@ public class login extends AppCompatActivity
                             }
                             else if (response.getString("message").equals("User Login Successfully"))
                             {
+                                dialog.dismiss();
                                 ed_phone.setError(null);
                                 ed_Password.setError(null);
                                 new SharedPrefs(login.this).setUserToken(response.getString("token"));
-                                subscribe();
-                                Intent i = new Intent(login.this, MainActivity.class);
-                                startActivity(i);
-                                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                                finish();
+
+                                JSONObject jsonObject = new JSONObject(response.getString("user"));
+                                new SharedPrefs(login.this).setUserId(jsonObject.getString("_id"));
+                                new SharedPrefs(login.this).setFirstName(jsonObject.getString("firstName"));
+                                new SharedPrefs(login.this).setLastName(jsonObject.getString("lastName"));
+                                new SharedPrefs(login.this).setGender(jsonObject.getString("gender"));
+                                new SharedPrefs(login.this).setDateOfBirth(jsonObject.getString("dateOfBirth"));
+                                new SharedPrefs(login.this).setImage(jsonObject.getString("image"));
+                                new SharedPrefs(login.this).setPhone(jsonObject.getString("phone"));
+                                new SharedPrefs(login.this).setLocation(jsonObject.getString("Location"));
+                                Log.e("anyText505",new SharedPrefs(login.this).getUserId());
+                                Log.e("anyText505",new SharedPrefs(login.this).getFirstName());
+                                Log.e("anyText505",new SharedPrefs(login.this).getLasttName());
+                                Log.e("anyText505",new SharedPrefs(login.this).getGender());
+                                Log.e("anyText505",new SharedPrefs(login.this).getDateOfBirth());
+                                Log.e("anyText505",new SharedPrefs(login.this).getImage());
+                                Log.e("anyText505",new SharedPrefs(login.this).getPhone());
+                                Log.e("anyText505",new SharedPrefs(login.this).getLocation());
+
+                                    if (new SharedPrefs(login.this).getUserToken().length()>5) {
+                                        subscribe();
+                                        Intent i = new Intent(login.this, MainActivity.class);
+                                        startActivity(i);
+                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                        finish();
+                                    }
 //                                Toast.makeText(login.this, new SharedPrefs(login.this).getUserToken(), Toast.LENGTH_SHORT).show();
                             }
 //                            Toast.makeText(login.this, "" + response, Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
+                            dialog.dismiss();
                             showError("Something Went Wrong,Try After Some time");
 //                            Toast.makeText(login.this, "Something Went Wrong,Try After Some time", Toast.LENGTH_SHORT).show();
                             throw new RuntimeException(e);
                         }
-                        dialog.dismiss();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -243,12 +267,12 @@ public class login extends AppCompatActivity
                     public void onComplete(@NonNull Task<Void> task) {
                         String msg = "Subscribed";
                         if (!task.isSuccessful()) {
-                            Toast.makeText(login.this, msg, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(login.this, msg, Toast.LENGTH_SHORT).show();
                             msg = "Subscribe failed";
                         }
                         else
                         {
-                            Toast.makeText(login.this, msg, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(login.this, msg, Toast.LENGTH_SHORT).show();
                             msg="subscribe done";
                         }
                         Log.d("TAG", msg);

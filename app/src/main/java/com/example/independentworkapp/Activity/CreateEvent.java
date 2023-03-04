@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -16,21 +17,26 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.independentworkapp.MainActivity;
 import com.example.independentworkapp.Network.Apis;
 import com.example.independentworkapp.Network.SharedPrefs;
 import com.example.independentworkapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
@@ -45,7 +51,10 @@ import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -60,6 +69,7 @@ public class CreateEvent extends AppCompatActivity
     TextView user_name,event_name,event_work,event_payment,event_members,event_address,event_date,event_other_details,payable_amount;
     SharedPrefs sp;
     Dialog dialog;
+    ScrollView layout;
     int i = 0;
 
 
@@ -99,7 +109,21 @@ public class CreateEvent extends AppCompatActivity
             @SuppressLint("SetTextI18n")
             @Override
             public void onPositiveButtonClick(Object selection) {
-                startDate.setText(materialDatePicker.getHeaderText());
+                String Rdate=materialDatePicker.getHeaderText();
+                java.util.Date date1=new Date(Rdate);
+                ZoneId z = ZoneId.of("Asia/Kolkata");
+                String fdate=""+date1.toInstant().atZone(z);
+                String reach_date = fdate.substring(0,10);
+                String st="";
+                ArrayList list =new ArrayList();
+                String[] strSplit = reach_date.split("-");
+                for (int j=0;j<strSplit.length;j++)
+                {
+                    st=strSplit[j];
+                    list.add(st);
+                }
+                String Date=list.get(2)+"/"+list.get(1)+"/"+list.get(0);
+                startDate.setText(Date);
             }
         });
         MaterialDatePicker.Builder materialDateBuilder2 = MaterialDatePicker.Builder.datePicker();
@@ -112,7 +136,21 @@ public class CreateEvent extends AppCompatActivity
             @SuppressLint("SetTextI18n")
             @Override
             public void onPositiveButtonClick(Object selection) {
-                endDate.setText(materialDatePicker2.getHeaderText());
+                String Rdate=materialDatePicker2.getHeaderText();
+                java.util.Date date1=new Date(Rdate);
+                ZoneId z = ZoneId.of("Asia/Kolkata");
+                String fdate=""+date1.toInstant().atZone(z);
+                String reach_date = fdate.substring(0,10);
+                String st="";
+                ArrayList list =new ArrayList();
+                String[] strSplit = reach_date.split("-");
+                for (int j=0;j<strSplit.length;j++)
+                {
+                    st=strSplit[j];
+                    list.add(st);
+                }
+                String Date=list.get(2)+"/"+list.get(1)+"/"+list.get(0);
+                endDate.setText(Date);
             }
         });
         btn_generate_invoice.setOnClickListener(new View.OnClickListener() {
@@ -139,46 +177,51 @@ public class CreateEvent extends AppCompatActivity
                 ed_address.setError(null);
                 ed_startDate.setError(null);
                 ed_endDate.setError(null);
+                ed_otherDetails.setError(null);
                 if (EventName.equals("")) {
-                    ed_eventName.setError("Event Name is required");
+                    ed_eventName.setError("Required");
                     eventName.requestFocus();
                 }
                 else if(EventWork.equals("")){
-                    ed_eventWork.setError("Event Work is required");
+                    ed_eventWork.setError("Required");
                     eventWork.requestFocus();
                 }
                 else if(Payment.equals("")){
-                    ed_payment.setError("Payment is required");
+                    ed_payment.setError("Required");
                     payment.requestFocus();
                 }
                 else if(Members.equals("") ){
-                    ed_members.setError("Members is required");
+                    ed_members.setError("Required");
                     members.requestFocus();
                 }
                 else if(Timeing.equals("")){
-                    ed_timeing.setError("Timeing is required");
+                    ed_timeing.setError("Required");
                     timeing.requestFocus();
                 }
                 else if(Location.equals("")){
-                    ed_location.setError("Location is required");
+                    ed_location.setError("Required");
                     location.requestFocus();
                 }
                 else if(MapLinkLocation.equals("")){
-                    ed_mapLocation.setError("Map Link Location is required");
+                    ed_mapLocation.setError("Required");
                     mapLinkLocation.requestFocus();
                 }
                 else if(Address.equals("") ){
-                    ed_address.setError("Address is required");
+                    ed_address.setError("Required");
                     address.requestFocus();
                 }
                 else if(StartDate.equals("") ){
-                    ed_startDate.setError("Start Date is required");
+                    ed_startDate.setError("Required");
                 }
                 else if(EndDate.equals("")){
-                   ed_endDate.setError("End Date is required");
+                   ed_endDate.setError("Required");
+                }
+                else if(OtherDetails.equals("")){
+                    ed_otherDetails.setError("Required");
                 }
                 else
                 {
+
                     user_name.setText("Username : "+"Pragnesh");
                     event_name.setText("Event Name : "+EventName);
                     event_work.setText("Event Work: "+EventWork);
@@ -186,13 +229,8 @@ public class CreateEvent extends AppCompatActivity
                     event_members.setText("Total Members : "+Members);
                     event_address.setText("Address : "+Address);
                     event_date.setText("Date : "+StartDate +" to "+ EndDate);
-                    if (event_other_details.length()>0) {
-                        event_other_details.setText("Other Details : "+OtherDetails);
-                    }
-                    else {
-                        event_other_details.setVisibility(View.GONE);
-                    }
-                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+                    event_other_details.setText("Other Details : "+OtherDetails);
+                    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate sDate = LocalDate.parse(StartDate, inputFormatter);
                     LocalDate eDate = LocalDate.parse(EndDate, inputFormatter);
                     // Calculate age based on birthdate
@@ -223,6 +261,57 @@ public class CreateEvent extends AppCompatActivity
         });
     }
 
+    private void createEvent(String id)
+    {
+        Log.e("anyText","call");
+        dialog.show();
+        Map<String,String> params = new HashMap<>();
+                params.put("name",eventName.getText().toString().trim());
+                params.put("work",eventWork.getText().toString().trim());
+                params.put("Location",location.getText().toString().trim());
+                params.put("start_date",startDate.getText().toString().trim());
+                params.put("end_date",endDate.getText().toString().trim());
+                params.put("map_location",mapLinkLocation.getText().toString().trim());
+                params.put("Address",address.getText().toString().trim());
+                params.put("members",members.getText().toString().trim());
+                params.put("description",otherDetails.getText().toString().trim());
+                params.put("paymentID",id);
+                params.put("time",timeing.getText().toString().trim());
+                params.put("paymentPerDay",payment.getText().toString().trim());
+                Log.e("anyText","perams is "+params);
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,Apis.POST_EVENT,new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        JsonParser jp = new JsonParser();
+                        JsonElement je = jp.parse(String.valueOf(response));
+                        String prettyJsonString = gson.toJson(je);
+                        Log.e("anyText",prettyJsonString);
+                        dialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showError("Something Went Wrong,Try After Some time");
+//                Toast.makeText(login.this, "Something Went Wrong,Try After Some time", Toast.LENGTH_SHORT).show();
+                Log.e("anyText", "Volly error " + error);
+                error.printStackTrace();
+                dialog.dismiss();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "Bearer " + new SharedPrefs(getApplicationContext()).getUserToken().toString());
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
     private void checkPaymentStatus() {
         dialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Apis.PAYMENT+"/"+sp.getPaymentId(),
@@ -242,15 +331,16 @@ public class CreateEvent extends AppCompatActivity
                                 dialog.dismiss();
                                 JSONObject jsonArrayObject = jsonArray.getJSONObject(0);
                                 String status = jsonArrayObject.getString("status");
+                                if (status.equals("captured")) {
+                                    activateEvent();
+                                }
                                 Toast.makeText(CreateEvent.this, "Payment captured.", Toast.LENGTH_SHORT).show();
-
                                 Log.e("anyText", "array : " + status);
                                 finish();
                             }
                             else {
                                 dialog.dismiss();
                                 Toast.makeText(CreateEvent.this, "Payment is not captured yet.", Toast.LENGTH_SHORT).show();
-
                             }
                         } catch (JSONException e) {
                             dialog.dismiss();
@@ -283,6 +373,9 @@ public class CreateEvent extends AppCompatActivity
         queue.add(stringRequest);
     }
 
+    private void activateEvent() {
+    }
+
     private void paymentRequest()
     {
         dialog.show();
@@ -299,15 +392,15 @@ public class CreateEvent extends AppCompatActivity
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String id=jsonObject.getString("id");
+                            createEvent(id);
                             sp.setPaymentId(id);
                             Log.e("anyText",id);
-                            dialog.dismiss();
+//                            dialog.dismiss();
                         } catch (JSONException e) {
                             dialog.dismiss();
                             throw new RuntimeException(e);
-
                         }
-                        Toast.makeText(CreateEvent.this, "Payment Request Sent", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(CreateEvent.this, "Payment Request Sent", Toast.LENGTH_SHORT).show();
                         btn_pay_status.setVisibility(View.VISIBLE);
                     }
                 },
@@ -403,6 +496,7 @@ public class CreateEvent extends AppCompatActivity
         dialog.setContentView(R.layout.loading_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
+        layout=findViewById(R.id.layout);
     }
 
     @Override
@@ -413,5 +507,15 @@ public class CreateEvent extends AppCompatActivity
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+    public void showError(String message)
+    {
+        Snackbar snackbar = Snackbar.make(layout,message,Snackbar.LENGTH_SHORT);
+        snackbar.show();
     }
 }

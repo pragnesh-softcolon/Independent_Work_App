@@ -67,14 +67,13 @@ public class signup_Form_2 extends AppCompatActivity
         setContentView(R.layout.activity_signup_form2);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         views();
-
-        Builder materialDateBuilder = Builder.datePicker();
-        materialDateBuilder.setTitleText("SELECT BIRTH DATE");
-        final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,City);
         Location.setThreshold(1);
         Location.setAdapter(adapter);
+        Builder materialDateBuilder = Builder.datePicker();
+        materialDateBuilder.setTitleText("SELECT BIRTH DATE");
+        final MaterialDatePicker materialDatePicker = materialDateBuilder.build();
         dob.setOnClickListener(new View.OnClickListener()
         {
             @Override

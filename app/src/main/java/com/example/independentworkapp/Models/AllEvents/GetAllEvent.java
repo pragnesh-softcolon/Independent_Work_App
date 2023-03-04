@@ -43,6 +43,9 @@ public class GetAllEvent {
     @SerializedName("map_location")
     @Expose
     private String mapLocation;
+    @SerializedName("Address")
+    @Expose
+    private String address;
     @SerializedName("members")
     @Expose
     private Integer members;
@@ -159,6 +162,13 @@ public class GetAllEvent {
 
     public void setMapLocation(String mapLocation) {
         this.mapLocation = mapLocation;
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Integer getMembers() {

@@ -32,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.independentworkapp.Activity.CreateEvent;
+import com.example.independentworkapp.Activity.EventDetail;
 import com.example.independentworkapp.Adapter.allEventAdapter;
 import com.example.independentworkapp.MainActivity;
 import com.example.independentworkapp.Models.AllEvents.GetAllEvent;
@@ -120,11 +121,11 @@ public class HomeFragment extends Fragment
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onResponse(String response) {
-                        Gson gsonp = new GsonBuilder().setPrettyPrinting().create();
-                        JsonParser jp = new JsonParser();
-                        JsonElement je = jp.parse(String.valueOf(response));
-                        String prettyJsonString = gsonp.toJson(je);
-                        Log.e("anyText",prettyJsonString);
+//                        Gson gsonp = new GsonBuilder().setPrettyPrinting().create();
+//                        JsonParser jp = new JsonParser();
+//                        JsonElement je = jp.parse(String.valueOf(response));
+//                        String prettyJsonString = gsonp.toJson(je);
+                        Log.e("anyText",response);
                         try {
                             JSONArray jsonArrayEvent_data = new JSONArray(response);
                             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -134,23 +135,22 @@ public class HomeFragment extends Fragment
                                 GetAllEvent[] getEvents = gson.fromJson(response, GetAllEvent[].class);
                                 EventData.addAll(Arrays.asList(getEvents));
                                 rv.setAdapter(adapter);
-//                                dialog.dismiss();
+                                dialog.dismiss();
                             }
                             else
                             {
-//                                dialog.dismiss();
+                                dialog.dismiss();
                             }
                         } catch (JSONException e) {
                             Log.e("anyText", "Error is : " + e);
-//                            dialog.dismiss();
+                            dialog.dismiss();
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getContext(), "Error", Toast.LENGTH_LONG).show();
-//                dialog.dismiss();
+                dialog.dismiss();
                 Log.d("anyText", String.valueOf(error));
             }
         })

@@ -10,6 +10,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -23,7 +25,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.example.independentworkapp.MainActivity;
 import com.example.independentworkapp.Network.Apis;
 import com.example.independentworkapp.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -44,12 +45,9 @@ public class signup_Form_3 extends AppCompatActivity
     Button btn_next;
     TextInputEditText Password,ConformPassword;
     TextInputLayout ed_paassword,ed_conformPassword;
-    TextView error;
     String password,conformPassword;
     String Phone,BirthDate,Place,imagePath;
     String FirstName,LastName, Gender="MALE";
-    Regex sampleRegex = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,15}$");
-    boolean isStrongPassword;
     Bitmap bitmap;
     Dialog dialog;
     @Override
@@ -73,6 +71,40 @@ public class signup_Form_3 extends AppCompatActivity
         Log.e("anyText",BirthDate);
         Log.e("anyText",Place);
         Log.e("anyText",imagePath);
+        Password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ed_paassword.setError(null);
+                ed_conformPassword.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        ConformPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                ed_paassword.setError(null);
+                ed_conformPassword.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         btn_next.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -85,21 +117,7 @@ public class signup_Form_3 extends AppCompatActivity
 
                     if (password.equals(conformPassword))
                     {
-////                        Regex sampleRegex = new Regex("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{6,15}$");
-//                        isStrongPassword= sampleRegex.containsMatchIn(conformPassword);
-//                        if (isStrongPassword)
-//                        {
                         Register();
-//                            Toast.makeText(signup_Form_3.this, "Account Successfully created", Toast.LENGTH_SHORT).show();
-//                            Intent next = new Intent(signup_Form_3.this, login.class);
-//                            startActivity(next);
-//                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//                            finish();
-//                        }
-//                        else
-//                        {
-//                            Toast.makeText(signup_Form_3.this, "Required [0-9] [a-z] [A-Z] [Special-character]", Toast.LENGTH_LONG).show();
-//                        }
                     } 
                     else 
                     {
