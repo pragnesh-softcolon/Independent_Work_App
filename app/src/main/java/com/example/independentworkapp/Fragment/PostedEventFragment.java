@@ -95,7 +95,7 @@ public class PostedEventFragment extends Fragment {
                                 GetCreatedEvent[] getEvents = gson.fromJson(response, GetCreatedEvent[].class);
                                 EventData.addAll(Arrays.asList(getEvents));
                                 rv.setAdapter(adapter);
-                                Toast.makeText(getContext(), "Event Created", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getContext(), "Event Created", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
                             else

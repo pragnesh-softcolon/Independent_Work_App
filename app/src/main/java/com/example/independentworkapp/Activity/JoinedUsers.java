@@ -1,21 +1,23 @@
-package com.example.independentworkapp.Fragment;
+package com.example.independentworkapp.Activity;
 
+import static androidx.core.app.ActivityCompat.requestPermissions;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Handler;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -29,8 +31,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.independentworkapp.Adapter.createdEventAdapter;
 import com.example.independentworkapp.Adapter.joinedEventAdapter;
+import com.example.independentworkapp.Adapter.joinedUserAdapter;
 import com.example.independentworkapp.Models.CreatedEvent.GetCreatedEvent;
-import com.example.independentworkapp.Models.JoinedEvents.JoinEvent;
+import com.example.independentworkapp.Models.JoinedUsers.JoinedUser;
 import com.example.independentworkapp.Network.Apis;
 import com.example.independentworkapp.Network.SharedPrefs;
 import com.example.independentworkapp.R;
@@ -39,7 +42,6 @@ import com.google.gson.GsonBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,62 +49,63 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+public class JoinedUsers extends AppCompatActivity {
 
-public class AppliedEventFragment extends Fragment {
+    String event_id;
     Dialog dialog;
-    View view;
-    List<JoinEvent> EventData = new ArrayList<>();
     RecyclerView rv;
-    joinedEventAdapter adapter;
-
+    joinedUserAdapter adapter;
+    List<JoinedUser> UserData = new ArrayList<>();
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_joined_users);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        view =inflater.inflate(R.layout.fragment_applied_event, container, false);
-        rv=view.findViewById(R.id.rv);
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        rv=findViewById(R.id.rv);
+        event_id=getIntent().getStringExtra("event_id");
         LinearLayoutManager manager;
-        adapter=new joinedEventAdapter(getContext(),EventData);
-        manager=new LinearLayoutManager(getContext());
-        dialog = new Dialog(getContext());
+        adapter=new joinedUserAdapter(JoinedUsers.this,UserData);
+        manager=new LinearLayoutManager(JoinedUsers.this);
+        dialog = new Dialog(JoinedUsers.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.loading_dialog);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
         rv.setLayoutManager(manager);
-        viewEvent();
-        // Inflate the layout for this fragment
-        return view;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 10);
+        }
+        getUsers(event_id);
     }
 
-    private void viewEvent()
-    {
+    private void getUsers(String event_id) {
         dialog.show();
-        final StringRequest stringRequest = new StringRequest(Request.Method.GET, Apis.VIEW_JOIN_EVENT,
+        final StringRequest stringRequest = new StringRequest(Request.Method.GET, Apis.JOINED_USER+"/"+event_id,
                 new Response.Listener<String>() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onResponse(String response) {
+//                        Gson gsonp = new GsonBuilder().setPrettyPrinting().create();
+//                        JsonParser jp = new JsonParser();
+//                        JsonElement je = jp.parse(String.valueOf(response));
+//                        String prettyJsonString = gsonp.toJson(je);
                         Log.e("anyText",response);
                         try {
-                            JSONObject userDetails = new JSONObject(response);
-                            JSONArray joinEventArray = userDetails.getJSONObject("userDetails").getJSONArray("join_event");
-                            Log.e("anyText","array : "+joinEventArray);
+                            dialog.dismiss();
                             GsonBuilder gsonBuilder = new GsonBuilder();
                             Gson gson = gsonBuilder.create();
-                            if (joinEventArray.length()>0)
-                            {
-                                JoinEvent[] getEvents = gson.fromJson(joinEventArray.toString(), JoinEvent[].class);
-                                EventData.addAll(Arrays.asList(getEvents));
+                            JSONArray jsonArray = new JSONArray(response);
+                            if (jsonArray.length()>0){
+                                JoinedUser[] getUsers = gson.fromJson(String.valueOf(jsonArray), JoinedUser[].class);
+                                UserData.addAll(Arrays.asList(getUsers));
                                 rv.setAdapter(adapter);
-                                dialog.dismiss();
                             }
-                            else
-                            {
-                                Toast.makeText(getContext(), "No Join Event Found", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
-                        } catch (JSONException e) {
+
+                        } catch (Exception e) {
                             Log.e("anyText", "Error is : " + e);
                             dialog.dismiss();
                             e.printStackTrace();
@@ -119,12 +122,23 @@ public class AppliedEventFragment extends Fragment {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("Authorization", "Bearer " + new SharedPrefs(getContext()).getUserToken().toString());
+                params.put("Authorization", "Bearer " + new SharedPrefs(JoinedUsers.this).getUserToken().toString());
                 return params;
             }
         };
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
-        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        RequestQueue requestQueue = Volley.newRequestQueue(JoinedUsers.this);
         requestQueue.add(stringRequest);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

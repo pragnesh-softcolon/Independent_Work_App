@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment
 
     private void viewEvents( int limit  , int offset)
     {
-//        dialog.show();
+        dialog.show();
         final StringRequest stringRequest = new StringRequest(Request.Method.GET, Apis.VIEW_ALL_EVENT + "?limit=" + limit + "&offset=" + offset,
                 new Response.Listener<String>() {
                     @SuppressLint("NotifyDataSetChanged")
@@ -135,12 +135,8 @@ public class HomeFragment extends Fragment
                                 GetAllEvent[] getEvents = gson.fromJson(response, GetAllEvent[].class);
                                 EventData.addAll(Arrays.asList(getEvents));
                                 rv.setAdapter(adapter);
-                                dialog.dismiss();
                             }
-                            else
-                            {
-                                dialog.dismiss();
-                            }
+                            dialog.dismiss();
                         } catch (JSONException e) {
                             Log.e("anyText", "Error is : " + e);
                             dialog.dismiss();
@@ -165,5 +161,22 @@ public class HomeFragment extends Fragment
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(stringRequest);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        isBack = true;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (isBack) //Do something
+        {
+            EventData.clear();
+            viewEvents(limit,0);
+            EventData.clear();
+        }
     }
 }

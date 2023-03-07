@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +64,7 @@ public class allEventAdapter extends RecyclerView.Adapter<allEventAdapter.MyView
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name,EventName,Work,Member,Date,Location,Payment;
-        CardView card;
+        LinearLayout layout;
         String id,eventName,eventWork,payment,timeing,members,startDate,endDate,location,mapLinkLocation,address,otherDetails;
         public MyViewHolder(@NonNull View v) {
             super(v);
@@ -74,7 +75,7 @@ public class allEventAdapter extends RecyclerView.Adapter<allEventAdapter.MyView
             Date=v.findViewById(R.id.Date);
             Location=v.findViewById(R.id.Locatoin);
             Payment=v.findViewById(R.id.Payment);
-            card=v.findViewById(R.id.card);
+            layout=v.findViewById(R.id.layout);
             v.setOnClickListener(this);
         }
 

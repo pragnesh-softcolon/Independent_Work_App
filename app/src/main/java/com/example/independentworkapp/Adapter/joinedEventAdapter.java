@@ -1,8 +1,6 @@
 package com.example.independentworkapp.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,39 +11,31 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.independentworkapp.Activity.JoinedUsers;
-import com.example.independentworkapp.Models.AllEvents.GetAllEvent;
 import com.example.independentworkapp.Models.CreatedEvent.GetCreatedEvent;
-import com.example.independentworkapp.Models.CreatedEvent.JoinUser;
+import com.example.independentworkapp.Models.JoinedEvents.JoinEvent;
 import com.example.independentworkapp.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.util.ArrayList;
 import java.util.List;
 
-public class createdEventAdapter extends RecyclerView.Adapter<createdEventAdapter.MyViewHolder>{
+public class joinedEventAdapter extends RecyclerView.Adapter<joinedEventAdapter.MyViewHolder>{
     Context context;
-    List<GetCreatedEvent> eventData;
-
-    public createdEventAdapter(Context context, List<GetCreatedEvent> eventData)
+    List<JoinEvent> eventData;
+    public joinedEventAdapter(Context context, List<JoinEvent> eventData)
     {
         this.context=context;
         this.eventData=eventData;
     }
-
     @NonNull
     @Override
-    public createdEventAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public joinedEventAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.event_row,parent,false);
-        return new createdEventAdapter.MyViewHolder(view);
+        return new joinedEventAdapter.MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull createdEventAdapter.MyViewHolder holder, int position) {
-        GetCreatedEvent event = eventData.get(position);
+    public void onBindViewHolder(@NonNull joinedEventAdapter.MyViewHolder holder, int position) {
+        JoinEvent event = eventData.get(position);
         holder.EventName.setText("Event Name : "+event.getName());
 //        int mem=event.getMembers();
 //        int join = event.getJoinUser().size();
@@ -56,16 +46,6 @@ public class createdEventAdapter extends RecyclerView.Adapter<createdEventAdapte
         holder.Date.setText("Event Duration : "+event.getStartDate()+" to "+event.getEndDate());
         holder.Location.setText("Location : "+event.getLocation());
         holder.Payment.setText("Payment : "+event.getPaymentPerDay().toString()+"/-");
-
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context,JoinedUsers.class);
-                intent.putExtra("event_id",event.getId());
-                context.startActivity(intent);
-            }
-        });
-
     }
 
     public int getItemCount()
@@ -90,7 +70,6 @@ public class createdEventAdapter extends RecyclerView.Adapter<createdEventAdapte
             Payment=v.findViewById(R.id.Payment);
             layout=v.findViewById(R.id.layout);
             name.setVisibility(View.GONE);
-
         }
     }
 }

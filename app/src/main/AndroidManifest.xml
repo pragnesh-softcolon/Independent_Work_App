@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:allowBackup="true"
@@ -18,10 +19,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".Activity.login"
-            android:screenOrientation="portrait"
-            android:noHistory="true"
+            android:name=".Activity.JoinedUsers"
+            android:label="Joined Users"
+            android:theme="@style/MyCustome"
             android:exported="false" />
+        <activity
+            android:name=".Activity.payment"
+            android:exported="false"
+            android:label="Payment"
+            android:theme="@style/MyCustome" />
+        <activity
+            android:name=".Activity.login"
+            android:exported="false"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.JoinedPostDetail"
             android:exported="false"
@@ -41,9 +52,9 @@
         <activity
             android:name=".Activity.EventDetail"
             android:exported="false"
-            android:theme="@style/MyCustome"
             android:label="Event Detail"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/MyCustome">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -93,8 +104,8 @@
         </activity>
         <activity
             android:name=".Activity.splashScreen"
-            android:noHistory="true"
             android:exported="true"
+            android:noHistory="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

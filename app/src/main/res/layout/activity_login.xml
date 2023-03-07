@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/signin_tv1"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:text="Please enter your email and password"
+                android:text="Please enter your phone and password"
                 android:textSize="@dimen/_13sdp" />
 
             <TextView

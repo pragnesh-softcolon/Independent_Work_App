@@ -32,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.independentworkapp.MainActivity;
 import com.example.independentworkapp.Network.Apis;
+import com.example.independentworkapp.Network.Constant;
 import com.example.independentworkapp.Network.SharedPrefs;
 import com.example.independentworkapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -70,9 +71,10 @@ public class CreateEvent extends AppCompatActivity
     SharedPrefs sp;
     Dialog dialog;
     ScrollView layout;
-    int i = 0;
+    String paymentId;
 
-
+    Boolean isBack;
+    int i=1;
 
     String referenceID;
     String currency = "INR";
@@ -85,8 +87,6 @@ public class CreateEvent extends AppCompatActivity
     String sms = "true";
     String notifyEmail = "true";
     String reminderEnable = "true";
-    String policyName = "BILL FROME PRAGNESH";
-    String amount,email,phoneNumber;
 
     @Override
 
@@ -256,7 +256,7 @@ public class CreateEvent extends AppCompatActivity
         btn_pay_status.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                        checkPaymentStatus();
+                checkPaymentStatus();
             }
         });
     }
@@ -288,7 +288,9 @@ public class CreateEvent extends AppCompatActivity
                         JsonElement je = jp.parse(String.valueOf(response));
                         String prettyJsonString = gson.toJson(je);
                         Log.e("anyText",prettyJsonString);
-                        dialog.dismiss();
+                        Toast.makeText(getApplicationContext(),"Event Created Successfully",Toast.LENGTH_SHORT).show();
+                        finish();
+//                        activateEvent();
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -332,9 +334,10 @@ public class CreateEvent extends AppCompatActivity
                                 JSONObject jsonArrayObject = jsonArray.getJSONObject(0);
                                 String status = jsonArrayObject.getString("status");
                                 if (status.equals("captured")) {
-                                    activateEvent();
+                                    createEvent(paymentId);
+
                                 }
-                                Toast.makeText(CreateEvent.this, "Payment captured.", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(CreateEvent.this, "Payment captured.", Toast.LENGTH_SHORT).show();
                                 Log.e("anyText", "array : " + status);
                                 finish();
                             }
@@ -359,7 +362,7 @@ public class CreateEvent extends AppCompatActivity
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Basic cnpwX3Rlc3RfYzlTRHdvTXRXVklNZks6Ym51WHVpVm9Vc29vbkpnVE4wamprTkdD");
+                headers.put("Authorization", Constant.BASIC_AUTH);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -373,8 +376,6 @@ public class CreateEvent extends AppCompatActivity
         queue.add(stringRequest);
     }
 
-    private void activateEvent() {
-    }
 
     private void paymentRequest()
     {
@@ -390,14 +391,19 @@ public class CreateEvent extends AppCompatActivity
                         String prettyJsonString = gson.toJson(je);
                         Log.e("anyText",prettyJsonString);
                         try {
+                            dialog.dismiss();
+                            i=2;
                             JSONObject jsonObject = new JSONObject(response);
-                            String id=jsonObject.getString("id");
-                            createEvent(id);
-                            sp.setPaymentId(id);
-                            Log.e("anyText",id);
-//                            dialog.dismiss();
+                            Intent pay=new Intent(CreateEvent.this,payment.class);
+                            pay.putExtra("paymentLink",jsonObject.getString("short_url"));
+                            startActivity(pay);
+                            paymentId=jsonObject.getString("id");
+//                            createEvent(id);
+                            sp.setPaymentId(paymentId);
+                            Log.e("anyText",paymentId);
                         } catch (JSONException e) {
                             dialog.dismiss();
+                            Toast.makeText(CreateEvent.this, "Something Went Wrong,Try After Some time",Toast.LENGTH_SHORT).show();
                             throw new RuntimeException(e);
                         }
 //                        Toast.makeText(CreateEvent.this, "Payment Request Sent", Toast.LENGTH_SHORT).show();
@@ -415,7 +421,7 @@ public class CreateEvent extends AppCompatActivity
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Basic cnpwX3Rlc3RfYzlTRHdvTXRXVklNZks6Ym51WHVpVm9Vc29vbkpnVE4wamprTkdD");
+                headers.put("Authorization", Constant.BASIC_AUTH);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -455,6 +461,7 @@ public class CreateEvent extends AppCompatActivity
 
     private void views()
     {
+        isBack=false;
         eventName=findViewById(R.id.event_name);
         eventWork=findViewById(R.id.event_work);
         payment=findViewById(R.id.event_payment);
@@ -517,5 +524,20 @@ public class CreateEvent extends AppCompatActivity
     {
         Snackbar snackbar = Snackbar.make(layout,message,Snackbar.LENGTH_SHORT);
         snackbar.show();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        isBack = true;
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        if (isBack) //Do something
+        {
+            Toast.makeText(this, "Check the payment status", Toast.LENGTH_SHORT).show();
+        }
     }
 }
