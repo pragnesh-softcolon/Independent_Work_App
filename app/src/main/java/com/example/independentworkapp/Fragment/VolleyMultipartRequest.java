@@ -1,4 +1,4 @@
-package com.example.independentworkapp.Activity;
+package com.example.independentworkapp.Fragment;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -185,7 +185,7 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
         dataOutputStream.writeBytes(lineEnd);
     }
 
-    protected class DataPart {
+    class DataPart {
         private String fileName;
         private byte[] content;
         private String type;
@@ -193,7 +193,7 @@ public class VolleyMultipartRequest extends Request<NetworkResponse> {
         public DataPart() {
         }
 
-        public DataPart(String name, byte[] data) {
+        DataPart(String name, byte[] data) {
             fileName = name;
             content = data;
         }

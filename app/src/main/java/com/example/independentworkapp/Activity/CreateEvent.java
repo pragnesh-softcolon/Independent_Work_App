@@ -167,6 +167,9 @@ public class CreateEvent extends AppCompatActivity
                 MapLinkLocation = mapLinkLocation.getText().toString().trim();
                 Address = address.getText().toString().trim();
                 OtherDetails = otherDetails.getText().toString().trim();
+                String inputDate = "08/03/2023"; // Replace with your desired date
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate date = LocalDate.parse(inputDate, formatter);
                 ed_eventName.setError(null);
                 ed_eventWork.setError(null);
                 ed_payment.setError(null);
@@ -213,6 +216,9 @@ public class CreateEvent extends AppCompatActivity
                 else if(StartDate.equals("") ){
                     ed_startDate.setError("Required");
                 }
+//                else if(LocalDate.parse(StartDate, formatter).isAfter()){
+//
+//                }
                 else if(EndDate.equals("")){
                    ed_endDate.setError("Required");
                 }
