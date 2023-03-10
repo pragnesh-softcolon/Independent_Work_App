@@ -1,6 +1,7 @@
 package com.example.independentworkapp.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.independentworkapp.Activity.EventDetail;
+import com.example.independentworkapp.Models.AllEvents.GetAllEvent;
 import com.example.independentworkapp.Models.CreatedEvent.GetCreatedEvent;
 import com.example.independentworkapp.Models.JoinedEvents.JoinEvent;
 import com.example.independentworkapp.R;
@@ -56,7 +59,7 @@ public class joinedEventAdapter extends RecyclerView.Adapter<joinedEventAdapter.
         return position;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name,EventName,Work,Member,Date,Location,Payment;
         LinearLayout layout;
         public MyViewHolder(@NonNull View v) {
@@ -70,6 +73,28 @@ public class joinedEventAdapter extends RecyclerView.Adapter<joinedEventAdapter.
             Payment=v.findViewById(R.id.Payment);
             layout=v.findViewById(R.id.layout);
             name.setVisibility(View.GONE);
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position=getAdapterPosition();
+            JoinEvent event = eventData.get(position);
+            Intent intent=new Intent(context, EventDetail.class);
+            intent.putExtra("activity","joinedEvent");
+            intent.putExtra("eventName",event.getName());
+            intent.putExtra("eventWork",event.getWork());
+            intent.putExtra("payment",event.getPaymentPerDay().toString());
+            intent.putExtra("members",event.getMembers().toString());
+            intent.putExtra("startDate",event.getStartDate());
+            intent.putExtra("endDate",event.getEndDate());
+            intent.putExtra("location",event.getLocation());
+            intent.putExtra("mapLinkLocation",event.getMapLocation());
+            intent.putExtra("address",event.getAddress());
+            intent.putExtra("otherDetails",event.getDescription());
+            intent.putExtra("timeing",event.getTime());
+            intent.putExtra("id",event.getId());
+            context.startActivity(intent);
         }
     }
 }

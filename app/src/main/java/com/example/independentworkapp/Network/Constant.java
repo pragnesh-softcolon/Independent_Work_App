@@ -9,7 +9,10 @@ public class Constant
     public final static String VIEW_JOIN_EVENT="getProfile";
     public final static String VIEW_CREATED_EVENT="get_created_events?user=true";
     public final static String APPLY_EVENT="join_event";
+    public final static String LEAVE_EVENT="leave_event";
+    public final static String REMOVE_FROM_EVENT="remove_user";
     public final static String JOINED_USER="get_joinUser";
+
     public final static String UPDATE_PROFILE="update_Details";
     public static final String PAYMENT="v1/payment_links";
     public static final String IMAGE="public/";

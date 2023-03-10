@@ -1,12 +1,32 @@
-<androidx.drawerlayout.widget.DrawerLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background"
+    tools:ignore="HardcodedText"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/groupname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        app:titleTextColor="@color/white"
+        app:subtitleTextColor="@color/white"
+        app:title="@string/app_name"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:ignore="HardcodedText">
+
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -23,3 +43,4 @@
         app:menu="@menu/menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
+</LinearLayout>

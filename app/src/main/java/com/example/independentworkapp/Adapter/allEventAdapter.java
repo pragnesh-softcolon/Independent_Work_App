@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.independentworkapp.Activity.EventDetail;
 import com.example.independentworkapp.Fragment.HomeFragment;
 import com.example.independentworkapp.Models.AllEvents.GetAllEvent;
+import com.example.independentworkapp.Network.SharedPrefs;
 import com.example.independentworkapp.R;
 
 import java.util.ArrayList;
@@ -81,11 +82,17 @@ public class allEventAdapter extends RecyclerView.Adapter<allEventAdapter.MyView
 
         @Override
         public void onClick(View view) {
+            Boolean isJoined=false;
             int position=getAdapterPosition();
             GetAllEvent event = eventData.get(position);
+            if (event.getJoinUser().contains(new SharedPrefs(context).getUserId())){
+                isJoined=true;
+            }
             Intent intent=new Intent(context, EventDetail.class);
+            intent.putExtra("activity","allEvent");
             intent.putExtra("eventName",event.getName());
             intent.putExtra("eventWork",event.getWork());
+            intent.putExtra("isJoined",isJoined);
             intent.putExtra("payment",event.getPaymentPerDay().toString());
             intent.putExtra("members",event.getMembers().toString());
             intent.putExtra("startDate",event.getStartDate());

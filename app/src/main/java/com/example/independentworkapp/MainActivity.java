@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -36,8 +37,12 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.groupname);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         navigationView=findViewById(R.id.navigationview);
         drawerLayout = findViewById(R.id.drawerlayout);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
@@ -45,6 +50,7 @@ public class MainActivity extends AppCompatActivity
         actionBarDrawerToggle.syncState();
         if(savedInstanceState==null)
         {
+            toolbar.setSubtitle("Home");
             navigationView.setCheckedItem(R.id.mhome);
             loadFrag(new HomeFragment(),true);
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -59,24 +65,28 @@ public class MainActivity extends AppCompatActivity
                 {
                     case R.id.mhome:
                     {
+                        toolbar.setSubtitle("Home");
                         loadFrag(new HomeFragment(),false);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     }
                     case R.id.Applied_Events:
                     {
+                        toolbar.setSubtitle("Joined Events");
                         loadFrag(new AppliedEventFragment(),false);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     }
                     case R.id.Posted_Events:
                     {
+                        toolbar.setSubtitle("Created Events");
                         loadFrag(new PostedEventFragment(),false);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     }
                     case R.id.Edit_Profile:
                     {
+                        toolbar.setSubtitle("Profile");
                         loadFrag(new EditProfileFragment(),false);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;

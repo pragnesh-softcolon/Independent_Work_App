@@ -5,10 +5,12 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -43,9 +46,10 @@ import java.util.Map;
 
 public class EventDetail extends AppCompatActivity {
     TextInputEditText eventName,eventWork,payment,members,timeing,startDate,endDate,location,mapLinkLocation,address,otherDetails;
-    Button join;
+    Button btn;
     Dialog dialog;
     LinearLayout layout;
+    String eventID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,20 +59,73 @@ public class EventDetail extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
+        eventID=getIntent().getStringExtra("id");
         views();
         setData();
-        join.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int age = new AgeCalculator().calculate(new SharedPrefs(EventDetail.this).getDateOfBirth());
-                if (age>14) {
-                    joinEvent();
+                if (btn.getText().toString().equalsIgnoreCase("Join Event")) {
+                    int age = new AgeCalculator().calculate(new SharedPrefs(EventDetail.this).getDateOfBirth());
+                    if (age>14) {
+                        joinEvent();
+                    }
+                    else{
+                        showError("your age is not high enough");
+                    }
                 }
-                else{
-                    showError("your age is not high enough");
+                if (btn.getText().toString().equalsIgnoreCase("Leave Event")) {
+                    leaveEvent();
                 }
+
             }
         });
+    }
+
+    private void leaveEvent() {
+        dialog.show();
+        final StringRequest stringRequest = new StringRequest(Request.Method.DELETE, Apis.LEAVE_EVENT+"/"+eventID,
+                new Response.Listener<String>() {
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onResponse(String response) {
+//                        Gson gsonp = new GsonBuilder().setPrettyPrinting().create();
+//                        JsonParser jp = new JsonParser();
+//                        JsonElement je = jp.parse(String.valueOf(response));
+//                        String prettyJsonString = gsonp.toJson(je);
+                        try{
+                            JSONObject json = new JSONObject(response);
+                            String message = json.getString("message");
+                            int success = json.getInt("success");
+                            if(success==1){
+                                finish();
+                            }
+                            Log.e("anyText",response);
+                        }
+                        catch (JSONException e){
+                            e.printStackTrace();
+                        }
+
+                        dialog.dismiss();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                dialog.dismiss();
+                Log.d("anyText", String.valueOf(error));
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("Authorization", "Bearer " + new SharedPrefs(EventDetail.this).getUserToken().toString());
+                return params;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 1, 1.0f));
+        RequestQueue requestQueue = Volley.newRequestQueue(EventDetail.this);
+        requestQueue.add(stringRequest);
     }
 
     private void joinEvent() {
@@ -93,6 +150,9 @@ public class EventDetail extends AppCompatActivity {
                             }
                             if(jsonObject.getString("message").equals("user already joined")){
                                 showError("you have already joined");
+                            }
+                            if(jsonObject.getString("message").equals("Event is full")){
+                                showError("Event is full");
                             }
                         } catch (JSONException e) {
                             dialog.dismiss();
@@ -133,6 +193,19 @@ public class EventDetail extends AppCompatActivity {
         startDate.setText(getIntent().getStringExtra("startDate"));
         endDate.setText(getIntent().getStringExtra("endDate"));
         otherDetails.setText(getIntent().getStringExtra("otherDetails"));
+        if (getIntent().getStringExtra("activity").equals("joinedEvent")){
+            btn.setText("Leave Event");
+        }
+        if (getIntent().getBooleanExtra("isJoined",false)){
+            btn.setText("Event already joined");
+        }
+        else{
+            btn.setText("Join Event");
+        }
+//        if (getIntent().getStringExtra("activity").equals("allEvent")){
+//            btn.setText("Join Event");
+//        }
+
     }
 
     private void views() {
@@ -147,7 +220,7 @@ public class EventDetail extends AppCompatActivity {
         startDate=findViewById(R.id.event_start_date);
         endDate=findViewById(R.id.event_end_date);
         otherDetails=findViewById(R.id.event_otherDetails);
-        join=findViewById(R.id.btn_apply);
+        btn=findViewById(R.id.btn_apply);
         layout=findViewById(R.id.layout);
         dialog = new Dialog(EventDetail.this);
         dialog.setContentView(R.layout.loading_dialog);

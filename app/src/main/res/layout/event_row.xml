@@ -14,7 +14,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -23,66 +22,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="5dp">
+            android:padding="3dp">
+
             <TextView
                 android:id="@+id/name"
                 android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/black"
                 android:layout_height="match_parent"
+                android:fontFamily="@font/nunito"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
                 android:text="User name"
-                android:textSize="20dp"/>
+                android:textColor="@color/black"
+                android:textSize="@dimen/_20ssp" />
         </LinearLayout>
+
         <TextView
             android:contentDescription="event name"
-            android:padding="5dp"
+            android:fontFamily="@font/nunito"
+            android:padding="3dp"
             android:textColor="@color/black"
             android:id="@+id/EventName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="@dimen/_13ssp"
             android:hint="Event name" />
 
 
         <TextView
-            android:padding="5dp"
+            android:padding="3dp"
             android:textColor="@color/black"
             android:id="@+id/Work"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="@dimen/_13ssp"
             android:hint="Work" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/Member"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Members"
-                android:padding="5dp"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
 
 
-
-
-        </LinearLayout>
         <TextView
+            android:fontFamily="@font/nunito"
             android:id="@+id/Date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:contentDescription="Start date &amp; End Date"
             android:hint="Start date to End Date"
-            android:padding="5dp"
+            android:padding="3dp"
             android:textColor="@color/black"
-            android:textSize="14dp"/>
+            android:textSize="@dimen/_13ssp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,26 +78,37 @@
 
         <TextView
             android:layout_weight="1"
-            android:padding="5dp"
+            android:fontFamily="@font/nunito"
+            android:padding="3dp"
             android:contentDescription="event location"
             android:textColor="@color/black"
             android:id="@+id/Locatoin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="@dimen/_13ssp"
             android:hint="Locaton"
             android:layout_marginBottom="@dimen/_10sdp"/>
         <TextView
             android:id="@+id/Payment"
+            android:fontFamily="@font/nunito"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:contentDescription="Payment"
             android:gravity="center"
             android:hint="Payment"
-            android:padding="5dp"
+            android:padding="3dp"
             android:textColor="@color/black"
-            android:textSize="14dp"/>
+            android:textSize="@dimen/_13ssp"/>
     </LinearLayout>
+        <TextView
+            android:padding="3dp"
+            android:id="@+id/Member"
+            android:fontFamily="@font/nunito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Members"
+            android:textSize="@dimen/_13ssp"
+            android:textColor="@color/black"/>
     </LinearLayout>
 </LinearLayout>

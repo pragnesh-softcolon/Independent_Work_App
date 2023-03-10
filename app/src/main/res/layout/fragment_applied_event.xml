@@ -7,17 +7,10 @@
     tools:context=".Fragment.AppliedEventFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Joined event"
-        android:textSize="@dimen/_30ssp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/event_row"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </FrameLayout>

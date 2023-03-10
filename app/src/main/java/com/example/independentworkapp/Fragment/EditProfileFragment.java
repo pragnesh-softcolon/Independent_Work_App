@@ -58,6 +58,8 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -445,7 +447,16 @@ public class EditProfileFragment extends Fragment
         DOB.setText(new SharedPrefs(getContext()).getDateOfBirth());
         Phone.setText(new SharedPrefs(getContext()).getPhone());
         Location.setText(new SharedPrefs(getContext()).getLocation());
-        Glide.with(getContext()).load(Apis.IMAGE+new SharedPrefs(getContext()).getImage()).into(imageView);
+        Log.e("anyText",Apis.IMAGE+new SharedPrefs(getContext()).getImage());
+        try {
+            String url = Apis.IMAGE+new SharedPrefs(getContext()).getImage();
+            String fixedUrl = url.replaceAll(" ", "%20");
+            Glide.with(getContext()).load(fixedUrl).into(imageView);
+            Log.e("anyText",fixedUrl.toString());
+        }
+        catch (Exception e){
+            Log.e("anyText",""+e);
+        }
     }
     private void openCamera()
     {

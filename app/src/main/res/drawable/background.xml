@@ -4,15 +4,11 @@
         <shape
             android:thickness="0dp"
             android:shape="rectangle">
-            <corners
-                android:topRightRadius="@dimen/_5sdp"
-                android:topLeftRadius="@dimen/_5sdp"
-                android:bottomLeftRadius="@dimen/_5sdp"
-                android:bottomRightRadius="@dimen/_5sdp"/>
+            <stroke/>
             <gradient
-                android:startColor="#800178B8"
+                android:startColor="#80C7EBF9"
                 android:angle="45"
-                android:endColor="#80C7EBF9"
+                android:endColor="#800178B8"
                 android:type="linear"/>
         </shape>
     </item>

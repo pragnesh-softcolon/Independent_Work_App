@@ -31,12 +31,14 @@
         <activity
             android:name=".Activity.JoinedUsers"
             android:label="Joined Users"
+            android:screenOrientation="portrait"
             android:theme="@style/MyCustome"
             android:exported="false" />
         <activity
             android:name=".Activity.payment"
             android:exported="false"
             android:label="Payment"
+            android:screenOrientation="portrait"
             android:theme="@style/MyCustome" />
         <activity
             android:name=".Activity.login"
@@ -106,8 +108,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyCustome">
+            android:theme="@style/stark"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
