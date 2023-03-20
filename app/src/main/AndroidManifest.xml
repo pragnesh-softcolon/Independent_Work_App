@@ -6,9 +6,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -20,20 +20,29 @@
         android:theme="@style/Theme.IndependentWorkApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".Activity.changePassword"
+            android:exported="false" />
+        <activity
+            android:name=".Activity.forgotPassword"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".Firebase.MyFirebaseMessagingService"
-            android:stopWithTask="false"
-            android:exported="false">
+            android:exported="false"
+            android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity
             android:name=".Activity.JoinedUsers"
+            android:exported="false"
             android:label="Joined Users"
             android:screenOrientation="portrait"
-            android:theme="@style/MyCustome"
-            android:exported="false" />
+            android:theme="@style/MyCustome" />
         <activity
             android:name=".Activity.payment"
             android:exported="false"
@@ -108,8 +117,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:theme="@style/stark"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/stark">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

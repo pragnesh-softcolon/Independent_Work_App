@@ -61,7 +61,7 @@ public class login extends AppCompatActivity
     ScrollView layout;
     TextInputEditText phone,password;
     TextInputLayout ed_phone,ed_Password;
-    TextView signup;
+    TextView signup,forget_pass;
     Button btn_signIn;
     Dialog dialog;
     int i=0;
@@ -150,6 +150,11 @@ public class login extends AppCompatActivity
             overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
             finish();
         });
+        forget_pass.setOnClickListener(view -> {
+            Intent form1=new Intent(login.this,forgotPassword.class);
+            startActivity(form1);
+            overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+        });
     }
 
     private void views()
@@ -166,6 +171,7 @@ public class login extends AppCompatActivity
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.setCancelable(false);
         layout=findViewById(R.id.layout);
+        forget_pass=findViewById(R.id.forget_pass);
     }
     public void login() {
         dialog.show();
@@ -173,71 +179,68 @@ public class login extends AppCompatActivity
         params.put("phone",phone.getText().toString().trim());
         params.put("password",password.getText().toString());
         final JsonObjectRequest request = new JsonObjectRequest(Apis.LOGIN,new JSONObject(params),
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                        JsonParser jp = new JsonParser();
-                        JsonElement je = jp.parse(String.valueOf(response));
-                        String prettyJsonString = gson.toJson(je);
-                        Log.e("anyText",prettyJsonString);
-                        try {
-                            if (response.getString("message").equals("User does not exist"))
-                            {
-                                dialog.dismiss();
-                                ed_phone.setError(" ");
-                                phone.requestFocus();
-                                showError("Phone Number does not exist");
-                            }
-                            else if (response.getString("message").equals("Invalid password"))
-                            {
-                                dialog.dismiss();
-                                ed_phone.setError(null);
-                                ed_Password.setError(" ");
-                                password.requestFocus();
-                                showError("Invalid Password");
-                            }
-                            else if (response.getString("message").equals("User Login Successfully"))
-                            {
-                                dialog.dismiss();
-                                ed_phone.setError(null);
-                                ed_Password.setError(null);
-                                new SharedPrefs(login.this).setUserToken(response.getString("token"));
-
-                                JSONObject jsonObject = new JSONObject(response.getString("user"));
-                                new SharedPrefs(login.this).setUserId(jsonObject.getString("_id"));
-                                new SharedPrefs(login.this).setFirstName(jsonObject.getString("firstName"));
-                                new SharedPrefs(login.this).setLastName(jsonObject.getString("lastName"));
-                                new SharedPrefs(login.this).setGender(jsonObject.getString("gender"));
-                                new SharedPrefs(login.this).setDateOfBirth(jsonObject.getString("dateOfBirth"));
-                                new SharedPrefs(login.this).setImage(jsonObject.getString("image"));
-                                new SharedPrefs(login.this).setPhone(jsonObject.getString("phone"));
-                                new SharedPrefs(login.this).setLocation(jsonObject.getString("Location"));
-                                Log.e("anyText505",new SharedPrefs(login.this).getUserId());
-                                Log.e("anyText505",new SharedPrefs(login.this).getFirstName());
-                                Log.e("anyText505",new SharedPrefs(login.this).getLasttName());
-                                Log.e("anyText505",new SharedPrefs(login.this).getGender());
-                                Log.e("anyText505",new SharedPrefs(login.this).getDateOfBirth());
-                                Log.e("anyText505",new SharedPrefs(login.this).getImage());
-                                Log.e("anyText505",new SharedPrefs(login.this).getPhone());
-                                Log.e("anyText505",new SharedPrefs(login.this).getLocation());
-
-                                    if (new SharedPrefs(login.this).getUserToken().length()>5) {
-                                        subscribe();
-                                        Intent i = new Intent(login.this, MainActivity.class);
-                                        startActivity(i);
-                                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                        finish();
-                                    }
-//                                Toast.makeText(login.this, new SharedPrefs(login.this).getUserToken(), Toast.LENGTH_SHORT).show();
-                            }
-//                            Toast.makeText(login.this, "" + response, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
+                response -> {
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                    JsonParser jp = new JsonParser();
+                    JsonElement je = jp.parse(String.valueOf(response));
+                    String prettyJsonString = gson.toJson(je);
+                    Log.e("anyText",prettyJsonString);
+                    try {
+                        if (response.getString("message").equals("User does not exist"))
+                        {
                             dialog.dismiss();
-                            showError("Something Went Wrong,Try After Some time");
-//                            Toast.makeText(login.this, "Something Went Wrong,Try After Some time", Toast.LENGTH_SHORT).show();
-                            throw new RuntimeException(e);
+                            ed_phone.setError(" ");
+                            phone.requestFocus();
+                            showError("Phone Number does not exist");
                         }
+                        else if (response.getString("message").equals("Invalid password"))
+                        {
+                            dialog.dismiss();
+                            ed_phone.setError(null);
+                            ed_Password.setError(" ");
+                            password.requestFocus();
+                            showError("Invalid Password");
+                        }
+                        else if (response.getString("message").equals("User Login Successfully"))
+                        {
+                            dialog.dismiss();
+                            ed_phone.setError(null);
+                            ed_Password.setError(null);
+                            new SharedPrefs(login.this).setUserToken(response.getString("token"));
+
+                            JSONObject jsonObject = new JSONObject(response.getString("user"));
+                            new SharedPrefs(login.this).setUserId(jsonObject.getString("_id"));
+                            new SharedPrefs(login.this).setFirstName(jsonObject.getString("firstName"));
+                            new SharedPrefs(login.this).setLastName(jsonObject.getString("lastName"));
+                            new SharedPrefs(login.this).setGender(jsonObject.getString("gender"));
+                            new SharedPrefs(login.this).setDateOfBirth(jsonObject.getString("dateOfBirth"));
+                            new SharedPrefs(login.this).setImage(jsonObject.getString("image"));
+                            new SharedPrefs(login.this).setPhone(jsonObject.getString("phone"));
+                            new SharedPrefs(login.this).setLocation(jsonObject.getString("Location"));
+                            Log.e("anyText505",new SharedPrefs(login.this).getUserId());
+                            Log.e("anyText505",new SharedPrefs(login.this).getFirstName());
+                            Log.e("anyText505",new SharedPrefs(login.this).getLasttName());
+                            Log.e("anyText505",new SharedPrefs(login.this).getGender());
+                            Log.e("anyText505",new SharedPrefs(login.this).getDateOfBirth());
+                            Log.e("anyText505",new SharedPrefs(login.this).getImage());
+                            Log.e("anyText505",new SharedPrefs(login.this).getPhone());
+                            Log.e("anyText505",new SharedPrefs(login.this).getLocation());
+
+                                if (new SharedPrefs(login.this).getUserToken().length()>5) {
+                                    subscribe();
+                                    Intent i = new Intent(login.this, MainActivity.class);
+                                    startActivity(i);
+                                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                    finish();
+                                }
+//                                Toast.makeText(login.this, new SharedPrefs(login.this).getUserToken(), Toast.LENGTH_SHORT).show();
+                        }
+//                            Toast.makeText(login.this, "" + response, Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        dialog.dismiss();
+                        showError("Something Went Wrong,Try After Some time");
+//                            Toast.makeText(login.this, "Something Went Wrong,Try After Some time", Toast.LENGTH_SHORT).show();
+                        throw new RuntimeException(e);
                     }
                 }, new Response.ErrorListener() {
             @Override

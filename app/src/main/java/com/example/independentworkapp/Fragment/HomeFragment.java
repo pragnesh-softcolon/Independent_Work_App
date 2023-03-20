@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment
                 {
                     // in this method we are incrementing page number,
                     // making progress bar visible and calling get data method.
-                    offset = offset + 10;
+                    offset = offset + limit;
                     viewEvents(limit,offset);
                 }
             }

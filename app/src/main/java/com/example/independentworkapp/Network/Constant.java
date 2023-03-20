@@ -14,6 +14,9 @@ public class Constant
     public final static String JOINED_USER="get_joinUser";
 
     public final static String UPDATE_PROFILE="update_Details";
+    public final static String REQUEST_OTP="requestOtp";
+    public final static String VERIFY_OTP="verify-otp";
+    public final static String CHANGE_PASSWORD="change-password";
     public static final String PAYMENT="v1/payment_links";
     public static final String IMAGE="public/";
     public static final String PAYMENT_USER_NAME="rzp_test_c9SDwoMtWVIMfK/";
