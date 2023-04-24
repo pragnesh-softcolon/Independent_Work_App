@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -55,6 +56,7 @@ public class forgotPassword extends AppCompatActivity {
     private EditText digit4;
     private EditText digit5;
     private EditText digit6;
+    TextView signIn;
     String phone;
     String token;
     Boolean isOTPGenerated=false;
@@ -75,6 +77,7 @@ public class forgotPassword extends AppCompatActivity {
         digit4 = findViewById(R.id.digit4);
         digit5 = findViewById(R.id.digit5);
         digit6 = findViewById(R.id.digit6);
+        signIn=findViewById(R.id.go_signin);
         request_otp = findViewById(R.id.btn_sent);
         dialog = new Dialog(forgotPassword.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -88,6 +91,15 @@ public class forgotPassword extends AppCompatActivity {
         digit5.addTextChangedListener(new PasscodeTextWatcher(digit5, digit6));
         digit6.addTextChangedListener(new PasscodeTextWatcher(digit6, null));
         PermissionGranted();
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(forgotPassword.this, login.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                finish();
+            }
+        });
         request_otp.setOnClickListener(view ->{
             phone =ed_phone.getEditText().getText().toString().trim();
             if (phone.isEmpty()){
@@ -195,6 +207,7 @@ public class forgotPassword extends AppCompatActivity {
             }
             return false;
         });
+
     }
 
     private void generateOTP(String phone) {
