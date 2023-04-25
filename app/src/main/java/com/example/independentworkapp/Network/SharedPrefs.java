@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 public class SharedPrefs
 {
     private Context context;
-
     private String APP_NAME= "INDEPENDENT_WORK_APP";
 
     private SharedPreferences mSharedPreferences;
@@ -18,7 +17,6 @@ public class SharedPrefs
         mSharedPreferences = context.getSharedPreferences(APP_NAME,
                 Context.MODE_PRIVATE);
         prefsEditor = mSharedPreferences.edit();
-
     }
     //  get the access token of user
     public void setUserToken(String Token) {

@@ -296,14 +296,23 @@ public class forgotPassword extends AppCompatActivity {
                     Log.e("anyText",prettyJsonString);
                     dialog.dismiss();
                     try {
-                        String token = response.getString("access_token");
-                        Toast.makeText(this, "OTP Verified", Toast.LENGTH_SHORT).show();
-                        Intent i = new Intent(forgotPassword.this,changePassword.class);
-                        i.putExtra("token",token);
-                        i.putExtra("phone",phone);
-                        startActivity(i);
-                        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-                        finish();
+                        String msg = response.getString("message");
+                        if (msg.equals("otp not match")){
+                            Toast.makeText(this, "Invalid OTP", Toast.LENGTH_SHORT).show();
+                        }
+                        if (msg.equals("otp is Expired")){
+                            Toast.makeText(this, "OTP Expired", Toast.LENGTH_SHORT).show();
+                        }
+                        if (msg.equals("otp verified")) {
+                            String token = response.getString("access_token");
+                            Toast.makeText(this, "OTP Verified", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(forgotPassword.this, changePassword.class);
+                            i.putExtra("token", token);
+                            i.putExtra("phone", phone);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            finish();
+                        }
                     } catch (JSONException e) {
                         Toast.makeText(forgotPassword.this, "Invalid OTP", Toast.LENGTH_SHORT).show();
                         throw new RuntimeException(e);

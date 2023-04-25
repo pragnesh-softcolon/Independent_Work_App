@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.independentworkapp.Extra.AgeCalculator;
 import com.example.independentworkapp.R;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
@@ -42,6 +43,7 @@ import java.util.Date;
 public class signup_Form_2 extends AppCompatActivity
 {
     Button btn_next,UploadImage;
+    Boolean isValid= true;
     TextInputEditText dob,PhoneNumber;
     TextInputLayout ed_DOB,ed_phone,ed_Location;
     AutoCompleteTextView Location;
@@ -87,7 +89,6 @@ public class signup_Form_2 extends AppCompatActivity
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onPositiveButtonClick(Object selection) {
-//                        dob.setText(materialDatePicker.getHeaderText());
                         String Rdate=materialDatePicker.getHeaderText();
                         java.util.Date date1=new Date(Rdate);
                         ZoneId z = ZoneId.of("Asia/Kolkata");
@@ -103,16 +104,12 @@ public class signup_Form_2 extends AppCompatActivity
                         }
                         String Date=list.get(2)+"/"+list.get(1)+"/"+list.get(0);
                         dob.setText(Date);
-//                        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("MMM d, yyyy");
-//                        LocalDate birthdate = LocalDate.parse(materialDatePicker.getHeaderText(), inputFormatter);
-//                        LocalDate today = LocalDate.now();
-//                        Period age1 = Period.between(birthdate, today);
-//                        Log.e("anyTextage",""+age1.getYears());
                     }
                 });
         btn_next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isValid=true;
                 location1=Location.getText().toString();
                 for (int i=0;i<City.length;i++)
                 {
@@ -123,41 +120,50 @@ public class signup_Form_2 extends AppCompatActivity
                         break;
                     }
                 }
-                Phone=PhoneNumber.getText().toString().trim();
-                BirthDate=dob.getText().toString().trim();
+                Phone=PhoneNumber.getText().toString();
+                BirthDate=dob.getText().toString();
                 if (Phone.isEmpty())
                 {
                     ed_phone.setError("Required");
-                    ed_phone.requestFocus();
+                    isValid=false;
+                    Log.e("anytext","1");
                 }
-                else if(Phone.length()!=10)
+                 if(Phone.length()!=10)
                 {
-                    Toast.makeText(signup_Form_2.this, ""+Phone.length(), Toast.LENGTH_SHORT).show();
                     ed_phone.setError("Invalid Phone Number");
-                    ed_phone.requestFocus();
+                    isValid=false;
+                    Log.e("anytext","12");
                 }
-                else if(BirthDate.isEmpty())
+                 if(BirthDate.isEmpty())
                 {
-                    ed_Location.setError(null);
-                    ed_DOB.setError("Required");
+                    ed_DOB.setError("Enter Date Of Birth");
+                    isValid=false;
+                    Log.e("anytext","13");
                 }
-                else if (!location1.equalsIgnoreCase(Place))
+                 if (!BirthDate.isEmpty()) {
+                     if (new AgeCalculator().calculate(BirthDate) < 15) {
+                         ed_DOB.setError("Your age must be greater than 15 to create account");
+                         isValid = false;
+                         Log.e("anytext","14");
+                     }
+                 }
+                 if (!location1.equalsIgnoreCase(Place))
                 {
-                    ed_Location.setError(null);
-                    ed_DOB.setError(null);
                     ed_Location.setError("Required");
-                    ed_Location.requestFocus();
+                    isValid=false;
+                    Log.e("anytext","15");
                 }
 
-                else if(!isImageSelected)
+                 if(!isImageSelected)
                 {
-                    ed_Location.setError(null);
-                    ed_DOB.setError(null);
-                    ed_Location.setError(null);
                     error_image.setVisibility(View.VISIBLE);
+                    isValid=false;
+                    Log.e("anytext","16");
                 }
-                else
+                Toast.makeText(signup_Form_2.this, ""+isValid, Toast.LENGTH_SHORT).show();
+                if(isValid)
                 {
+                    ed_phone.setError(null);
                     ed_Location.setError(null);
                     ed_DOB.setError(null);
                     ed_Location.setError(null);
@@ -178,6 +184,7 @@ public class signup_Form_2 extends AppCompatActivity
         UploadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
 
                 Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i,RESULT_LOAD_IMAGE);

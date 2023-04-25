@@ -30,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.independentworkapp.Extra.DateComparator;
 import com.example.independentworkapp.MainActivity;
 import com.example.independentworkapp.Network.Apis;
 import com.example.independentworkapp.Network.Constant;
@@ -73,7 +74,7 @@ public class CreateEvent extends AppCompatActivity
     ScrollView layout;
     String paymentId;
 
-    Boolean isBack;
+    Boolean isBack,isValid=true;
     int i=1;
 
     String referenceID;
@@ -156,6 +157,7 @@ public class CreateEvent extends AppCompatActivity
         btn_generate_invoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isValid = true;
                 EventName = eventName.getText().toString().trim();
                 EventWork =eventWork.getText().toString().trim();
                 Payment = payment.getText().toString().trim();
@@ -183,49 +185,71 @@ public class CreateEvent extends AppCompatActivity
                 ed_otherDetails.setError(null);
                 if (EventName.equals("")) {
                     ed_eventName.setError("Required");
-                    eventName.requestFocus();
+                  ;
+                    isValid=false;
                 }
-                else if(EventWork.equals("")){
+               if(EventWork.equals("")){
                     ed_eventWork.setError("Required");
-                    eventWork.requestFocus();
+
+                   isValid=false;
                 }
-                else if(Payment.equals("")){
+                if(Payment.equals("")){
                     ed_payment.setError("Required");
-                    payment.requestFocus();
+
+                    isValid=false;
                 }
-                else if(Members.equals("") ){
+               if(Members.equals("") ){
                     ed_members.setError("Required");
-                    members.requestFocus();
+
+                   isValid=false;
                 }
-                else if(Timeing.equals("")){
+                if(Timeing.equals("")){
                     ed_timeing.setError("Required");
-                    timeing.requestFocus();
+
+                    isValid=false;
                 }
-                else if(Location.equals("")){
+                if(Location.equals("")){
                     ed_location.setError("Required");
-                    location.requestFocus();
+
+                    isValid=false;
                 }
-                else if(MapLinkLocation.equals("")){
+                if(MapLinkLocation.equals("")){
                     ed_mapLocation.setError("Required");
-                    mapLinkLocation.requestFocus();
+                    isValid=false;
                 }
-                else if(Address.equals("") ){
+                if(Address.equals("") ){
                     ed_address.setError("Required");
-                    address.requestFocus();
+
+                    isValid=false;
                 }
-                else if(StartDate.equals("") ){
+                DateComparator dateComparator = new DateComparator();
+                if(StartDate.equals("") ){
                     ed_startDate.setError("Required");
+                    isValid=false;
                 }
-//                else if(LocalDate.parse(StartDate, formatter).isAfter()){
-//
-//                }
-                else if(EndDate.equals("")){
+                else {
+
+                    if (dateComparator.date1(StartDate) == 0) {
+                        ed_startDate.setError("Start Date Must Be Today's or Future-date");
+                        isValid = false;
+                    }
+                }
+
+                if(EndDate.equals("")){
                    ed_endDate.setError("Required");
+                    isValid=false;
                 }
-                else if(OtherDetails.equals("")){
+                else {
+                    if (dateComparator.date2(StartDate, EndDate) == 0) {
+                        ed_startDate.setError("End Date Must Be Today's or Future-date");
+                        isValid = false;
+                    }
+                }
+                if(OtherDetails.equals("")){
                     ed_otherDetails.setError("Required");
+                    isValid=false;
                 }
-                else
+                if(isValid)
                 {
 
                     user_name.setText("Username : "+"Pragnesh");
@@ -543,7 +567,8 @@ public class CreateEvent extends AppCompatActivity
         super.onResume();
         if (isBack) //Do something
         {
-            Toast.makeText(this, "Check the payment status", Toast.LENGTH_SHORT).show();
+            checkPaymentStatus();
+            Toast.makeText(this, "payment status is on checking", Toast.LENGTH_SHORT).show();
         }
     }
 }

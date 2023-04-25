@@ -63,6 +63,7 @@ public class login extends AppCompatActivity
     TextInputLayout ed_phone,ed_Password;
     TextView signup,forget_pass;
     Button btn_signIn;
+    Boolean isValid=true;
     Dialog dialog;
     int i=0;
     @Override
@@ -124,25 +125,24 @@ public class login extends AppCompatActivity
             }
         });
         btn_signIn.setOnClickListener(view -> {
+            isValid=true;
             if (Objects.requireNonNull(phone.getText()).toString().trim().isEmpty() || phone.getText().toString().trim().length()<10)
             {
                 ed_phone.setError("Please enter a valid phone number");
-                phone.requestFocus();
+                isValid=false;
             }
-            else if(Objects.requireNonNull(password.getText()).toString().isEmpty() || password.getText().toString().length()<6)
+             if(Objects.requireNonNull(password.getText()).toString().isEmpty() || password.getText().toString().length()<6)
             {
-                ed_phone.setError(null);
                 ed_Password.setError("Please enter a valid password");
-                password.requestFocus();
+                isValid=false;
             }
-            else
+            if(isValid)
             {
                 ed_phone.setError(null);
                 ed_Password.setError(null);
-
                 login();
-
             }
+//            Toast.makeText(this, ""+isValid, Toast.LENGTH_SHORT).show();
         });
         signup.setOnClickListener(view -> {
             Intent form1=new Intent(login.this,signup_Form_1.class);
@@ -191,7 +191,7 @@ public class login extends AppCompatActivity
                             dialog.dismiss();
                             ed_phone.setError(" ");
                             phone.requestFocus();
-                            showError("Phone Number does not exist");
+                            showError("Phone Number not registered");
                         }
                         else if (response.getString("message").equals("Invalid password"))
                         {

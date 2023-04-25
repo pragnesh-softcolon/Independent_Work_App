@@ -19,6 +19,7 @@ public class signup_Form_1 extends AppCompatActivity {
     TextInputEditText Fname,Lname;
     TextInputLayout ed_first_name,ed_last_name;
     String FirstName,LastName, Gender="MALE";
+    Boolean isValid= true;
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,23 +65,21 @@ public class signup_Form_1 extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                isValid = true;
                 FirstName = Fname.getText().toString().trim();
                 LastName = Lname.getText().toString().trim();
                 if (FirstName.isEmpty())
                 {
                     ed_first_name.setError("Enter First Name");
-                    ed_first_name.requestFocus();
+                    isValid = false;
                 }
-                else if(LastName.isEmpty())
+                 if(LastName.isEmpty())
                 {
-                    ed_first_name.setError(null);
                     ed_last_name.setError("Enter Last Name");
-                    ed_last_name.requestFocus();
+                    isValid = false;
                 }
-                else {
-//                    Toast.makeText(signup_Form_1.this, FirstName, Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(signup_Form_1.this, LastName, Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(signup_Form_1.this, Gender, Toast.LENGTH_SHORT).show();
+                if(isValid)
+                {
                     Intent next = new Intent(signup_Form_1.this, signup_Form_2.class);
                     next.putExtra("FirstName", FirstName);
                     next.putExtra("LastName", LastName);
