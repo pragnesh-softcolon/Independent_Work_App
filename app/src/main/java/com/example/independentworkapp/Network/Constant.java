@@ -19,8 +19,8 @@ public class Constant
     public final static String CHANGE_PASSWORD="change-password";
     public static final String PAYMENT="v1/payment_links";
     public static final String IMAGE="public/";
-    public static final String PAYMENT_USER_NAME="rzp_test_c9SDwoMtWVIMfK/";
-    public static final String PAYMENT_PASSWORD="bnuXuiVoUsoonJgTN0jjkNGC";
+    public static final String PAYMENT_USER_NAME="rzp_test_KlRhoAFXELSik0";
+    public static final String PAYMENT_PASSWORD="SyinOJmEdYsPKbIJYz3BlPu8";
     public static final String BASIC_AUTH="Basic cnpwX3Rlc3RfYzlTRHdvTXRXVklNZks6Ym51WHVpVm9Vc29vbkpnVE4wamprTkdD";
 
 }

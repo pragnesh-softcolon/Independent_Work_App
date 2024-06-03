@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,7 +82,7 @@ public class CreateEvent extends AppCompatActivity
     String currency = "INR";
     String acceptPartial = "true";
     String firstMinPartialAmount = "100";
-    String expireBy = "1691097357";
+    String expireBy = "1924905600"; //TODO :: Change this after 31 Dec 2030
     String description = "Test payment";
     String name = "Independent Work App";
 
@@ -346,6 +347,8 @@ public class CreateEvent extends AppCompatActivity
     }
     private void checkPaymentStatus() {
         dialog.show();
+
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Apis.PAYMENT+"/"+sp.getPaymentId(),
                 new Response.Listener<String>() {
                     @Override
@@ -392,13 +395,12 @@ public class CreateEvent extends AppCompatActivity
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", Constant.BASIC_AUTH);
+                String credentials = Constant.PAYMENT_USER_NAME + ":" + Constant.PAYMENT_PASSWORD;
+                String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+                headers.put("Authorization", auth);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
-
-
-
         };
 
 // Add the request to the RequestQueue.
@@ -433,6 +435,8 @@ public class CreateEvent extends AppCompatActivity
                             Log.e("anyText",paymentId);
                         } catch (JSONException e) {
                             dialog.dismiss();
+                            Log.e("anyText",e.getMessage());
+                            Log.e("anyText",e.getLocalizedMessage());
                             Toast.makeText(CreateEvent.this, "Something Went Wrong,Try After Some time",Toast.LENGTH_SHORT).show();
                             throw new RuntimeException(e);
                         }
@@ -451,7 +455,9 @@ public class CreateEvent extends AppCompatActivity
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("Authorization", Constant.BASIC_AUTH);
+                String credentials = Constant.PAYMENT_USER_NAME + ":" + Constant.PAYMENT_PASSWORD;
+                String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+                headers.put("Authorization", auth);
                 headers.put("Content-Type", "application/json");
                 return headers;
             }
@@ -480,6 +486,7 @@ public class CreateEvent extends AppCompatActivity
                         "    \"policy_name\": \"" + EventName + "\"\n" +
                         "  }\n" +
                         "}";
+                Log.e("anyText",requestBody);
                 return requestBody.getBytes();
             }
         };

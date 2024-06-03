@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
 import android.graphics.Matrix;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -451,7 +453,23 @@ public class EditProfileFragment extends Fragment
         try {
             String url = Apis.IMAGE+new SharedPrefs(getContext()).getImage();
             String fixedUrl = url.replaceAll(" ", "%20");
-            Glide.with(getContext()).load(fixedUrl).into(imageView);
+
+            String base64String = new SharedPrefs(getContext()).getImage();
+            if (base64String.startsWith("data:image")) {
+                base64String = base64String.substring(base64String.indexOf(",") + 1);
+            }
+
+            // Decode the Base64 string into bytes
+            byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
+
+            // Convert the bytes to a Bitmap
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+            // Load the Bitmap into the ImageView using Glide
+            Glide.with(imageView.getContext())
+                    .load(decodedByte)
+                    .into(imageView);
+//            Glide.with(getContext()).load(fixedUrl).into(imageView);
             Log.e("anyText",fixedUrl.toString());
         }
         catch (Exception e){

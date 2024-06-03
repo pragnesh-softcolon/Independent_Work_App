@@ -188,7 +188,7 @@ public class signup_Form_3 extends AppCompatActivity
                     public void onErrorResponse(VolleyError error)
                     {
                         Toast.makeText(getApplicationContext(), ""+error, Toast.LENGTH_LONG).show();
-                        Log.e("anyText",""+error);
+                        Log.e("anyText",""+error.getLocalizedMessage());
                         dialog.dismiss();
                     }
                 }) {
