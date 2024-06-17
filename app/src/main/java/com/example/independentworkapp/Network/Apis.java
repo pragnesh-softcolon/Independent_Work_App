@@ -18,8 +18,8 @@ public class Apis
 {
 //    Office api
 
-    public final static String BASE_URL="http://192.168.1.120:3000/api/";
-        public final static String BASE_URL_IMAGE="http://192.168.1.120:3000/";
+    public final static String BASE_URL="https://independent-work-app.onrender.com/api/";
+        public final static String BASE_URL_IMAGE="https://independent-work-app.onrender.com/";
 
     //    Personal api
 //    public final static String BASE_URL_IMAGE="https://independent-work-app.onrender.com/";
